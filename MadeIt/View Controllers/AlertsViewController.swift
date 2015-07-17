@@ -26,9 +26,9 @@ class AlertsViewController: UIViewController {
             switch identifier {
                 case "Next":
                 let source = segue.sourceViewController as! NewAlertViewController
-                realm.write() {
-                    realm.add(source.currentAlert!)
-                }
+//                realm.write() {
+//                    realm.add(source.currentAlert!)
+//                }
                 println("next button clicked")
                 case "Save":
                 let source = segue.sourceViewController as! NewAlertViewController

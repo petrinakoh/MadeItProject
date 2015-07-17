@@ -105,7 +105,6 @@
                     <connections>
                         <outlet property="tableView" destination="0K8-sb-66A" id="hxt-8j-pfj"/>
                         <segue destination="QqX-Qy-hha" kind="show" identifier="ShowExistingAlert" id="iPQ-xo-q7Z"/>
-                        <segue destination="bnb-xW-SV6" kind="show" id="kGO-Z6-lTa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3z-P2-Kbr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -141,7 +140,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Next" id="Spm-lf-sMm">
                             <connections>
-                                <segue destination="aIT-RO-9xo" kind="show" id="NKn-AJ-mgN"/>
+                                <segue destination="bnb-xW-SV6" kind="show" identifier="Next" id="G7x-Dp-3f4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -196,45 +195,6 @@
             </objects>
             <point key="canvasLocation" x="1256" y="1117"/>
         </scene>
-        <!--Save New Alert-->
-        <scene sceneID="rU4-Hd-L4E">
-            <objects>
-                <viewController id="aIT-RO-9xo" userLabel="Save New Alert" customClass="NewAlertViewController" customModule="MadeIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eSA-e9-jHl"/>
-                        <viewControllerLayoutGuide type="bottom" id="lDR-02-y08"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0vK-Dl-qvw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGs-9N-EvN">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <connections>
-                                    <segue destination="bnb-xW-SV6" kind="embed" identifier="ShowNewAlert" id="9PT-l3-fM0"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Add New Alert" id="8sc-vJ-ds0">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="f90-Yh-9IX">
-                            <connections>
-                                <segue destination="NZ8-V1-NFo" kind="unwind" identifier="Cancel" unwindAction="unwindToSegue:" id="Qx7-04-lfX"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="T5j-7L-sp6">
-                            <connections>
-                                <segue destination="NZ8-V1-NFo" kind="unwind" identifier="Save" unwindAction="unwindToSegue:" id="tAc-sa-iQl"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wqp-QJ-l1r" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="NZ8-V1-NFo" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1972" y="290"/>
-        </scene>
         <!--Contacts Display View Controller-->
         <scene sceneID="ec6-xM-Mzu">
             <objects>
@@ -244,7 +204,7 @@
                         <viewControllerLayoutGuide type="bottom" id="aE4-ym-Tpu"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="xes-4s-w9J">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contacts Here" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sr9-dP-mYB">
@@ -266,6 +226,11 @@
                         <color key="backgroundColor" red="0.30343792250000001" green="1" blue="0.8023488191" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Add New Alert" id="RTi-im-UlW" userLabel="Add New Alert">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="ofn-k8-Xo9"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="wid-Sf-TQa"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B4M-x6-i1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -274,6 +239,5 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="80x-tT-0ti"/>
-        <segue reference="9PT-l3-fM0"/>
     </inferredMetricsTieBreakers>
 </document>
