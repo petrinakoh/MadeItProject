@@ -20,15 +20,16 @@ class AlertsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
     @IBAction func unwindToSegue(segue: UIStoryboardSegue) {
         if let identifier = segue.identifier {
             let realm = Realm()
             switch identifier {
                 case "Next":
                 let source = segue.sourceViewController as! NewAlertViewController
-//                realm.write() {
-//                    realm.add(source.currentAlert!)
-//                }
+                realm.write() {
+                    realm.add(source.currentAlert!)
+                }
                 println("next button clicked")
                 case "Save":
                 let source = segue.sourceViewController as! NewAlertViewController
@@ -45,6 +46,7 @@ class AlertsViewController: UIViewController {
             
         }
     }
+
 
     override func viewDidLoad() {
         let realm = Realm()

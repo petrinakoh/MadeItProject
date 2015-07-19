@@ -22,6 +22,8 @@ class NewAlertViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // method to load appropriate view
+        
     }
 
     override func didReceiveMemoryWarning() {

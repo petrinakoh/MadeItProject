@@ -12,7 +12,7 @@ import AddressBookUI
 
 class ContactsDisplayViewController: UIViewController {
     
-    let addressBookRef: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
+    let addressBookRef: ABAddressBook? = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
     
     @IBAction func tappedAccessContacts(contactsButton: UIButton) {
         let authorizationStatus = ABAddressBookGetAuthorizationStatus()
