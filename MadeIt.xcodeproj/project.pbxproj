@@ -19,6 +19,13 @@
 		6F6533EA1B5422E6006C857D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6533E91B5422E6006C857D /* Alert.swift */; };
 		6FDCEC591B573B72000A9AA8 /* ContactsDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDCEC581B573B72000A9AA8 /* ContactsDisplayViewController.swift */; };
 		6FDCEC5B1B5C6C18000A9AA8 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDCEC5A1B5C6C18000A9AA8 /* FriendTableViewCell.swift */; };
+		6FDCEC5D1B5CC07E000A9AA8 /* SenseSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC5C1B5CC07E000A9AA8 /* SenseSdk.framework */; };
+		6FDCEC5F1B5CC0F2000A9AA8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC5E1B5CC0F2000A9AA8 /* CoreLocation.framework */; };
+		6FDCEC611B5CC0FC000A9AA8 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC601B5CC0FC000A9AA8 /* CoreMotion.framework */; };
+		6FDCEC631B5CC108000A9AA8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC621B5CC108000A9AA8 /* SystemConfiguration.framework */; };
+		6FDCEC651B5CC117000A9AA8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC641B5CC117000A9AA8 /* libz.dylib */; };
+		6FDCEC661B5CC195000A9AA8 /* SenseSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC5C1B5CC07E000A9AA8 /* SenseSdk.framework */; };
+		6FDCEC671B5CC195000A9AA8 /* SenseSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC5C1B5CC07E000A9AA8 /* SenseSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C8A34D46D32486FD40DC7F12 /* Pods_MadeItTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908F8852EC6C8B5D7BB17F79 /* Pods_MadeItTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F45A8FA31845D65DA6839F54 /* Pods_MadeIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C589E76873CD5CB5259D86 /* Pods_MadeIt.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -32,6 +39,20 @@
 			remoteInfo = MadeIt;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6FDCEC681B5CC195000A9AA8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6FDCEC671B5CC195000A9AA8 /* SenseSdk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00C0EAF5035E90D14D2020D2 /* Pods-MadeIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MadeIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-MadeIt/Pods-MadeIt.release.xcconfig"; sourceTree = "<group>"; };
@@ -53,6 +74,11 @@
 		6F6533E91B5422E6006C857D /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		6FDCEC581B573B72000A9AA8 /* ContactsDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsDisplayViewController.swift; sourceTree = "<group>"; };
 		6FDCEC5A1B5C6C18000A9AA8 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		6FDCEC5C1B5CC07E000A9AA8 /* SenseSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SenseSdk.framework; sourceTree = "<group>"; };
+		6FDCEC5E1B5CC0F2000A9AA8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6FDCEC601B5CC0FC000A9AA8 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		6FDCEC621B5CC108000A9AA8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6FDCEC641B5CC117000A9AA8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		908F8852EC6C8B5D7BB17F79 /* Pods_MadeItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MadeItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE18CFACEACC230D44CAD176 /* Pods-MadeItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MadeItTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MadeItTests/Pods-MadeItTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FD5C2690EECDE27C852933E2 /* Pods-MadeItTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MadeItTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MadeItTests/Pods-MadeItTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +89,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FDCEC651B5CC117000A9AA8 /* libz.dylib in Frameworks */,
+				6FDCEC631B5CC108000A9AA8 /* SystemConfiguration.framework in Frameworks */,
+				6FDCEC611B5CC0FC000A9AA8 /* CoreMotion.framework in Frameworks */,
+				6FDCEC661B5CC195000A9AA8 /* SenseSdk.framework in Frameworks */,
+				6FDCEC5F1B5CC0F2000A9AA8 /* CoreLocation.framework in Frameworks */,
+				6FDCEC5D1B5CC07E000A9AA8 /* SenseSdk.framework in Frameworks */,
 				F45A8FA31845D65DA6839F54 /* Pods_MadeIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +113,11 @@
 		0BF21BE58BC757B72CECB038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FDCEC5C1B5CC07E000A9AA8 /* SenseSdk.framework */,
+				6FDCEC641B5CC117000A9AA8 /* libz.dylib */,
+				6FDCEC621B5CC108000A9AA8 /* SystemConfiguration.framework */,
+				6FDCEC601B5CC0FC000A9AA8 /* CoreMotion.framework */,
+				6FDCEC5E1B5CC0F2000A9AA8 /* CoreLocation.framework */,
 				65C589E76873CD5CB5259D86 /* Pods_MadeIt.framework */,
 				908F8852EC6C8B5D7BB17F79 /* Pods_MadeItTests.framework */,
 			);
@@ -199,6 +236,8 @@
 				6F4E43DA1B509159007FC913 /* Resources */,
 				18141197BC1EA1468C9EFE6B /* Embed Pods Frameworks */,
 				BE6C1752E9B46F486A9285CD /* Copy Pods Resources */,
+				6FDCEC681B5CC195000A9AA8 /* Embed Frameworks */,
+				6FDCEC691B5CC218000A9AA8 /* Strip unused architectures */,
 			);
 			buildRules = (
 			);
@@ -241,6 +280,11 @@
 				TargetAttributes = {
 					6F4E43DB1B509159007FC913 = {
 						CreatedOnToolsVersion = 6.3.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					6F4E43F01B509159007FC913 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -332,6 +376,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		6FDCEC691B5CC218000A9AA8 /* Strip unused architectures */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Strip unused architectures";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# http://ikennd.ac/blog/2015/02/stripping-unwanted-architectures-from-dynamic-libraries-in-xcode/\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n# This script strips unused architectures\nfind \"$APP_PATH\" -name 'SenseSdk.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\nEXTRACTED_ARCHS=()\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\ndone";
 		};
 		89AD49E5048E02F732AE554C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -522,6 +580,10 @@
 			baseConfigurationReference = 1A3759BC80D1C876EB737FAE /* Pods-MadeIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MadeIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -533,6 +595,10 @@
 			baseConfigurationReference = 00C0EAF5035E90D14D2020D2 /* Pods-MadeIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MadeIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

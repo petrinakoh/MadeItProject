@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import AddressBook
 import AddressBookUI
+import SenseSdk
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         GMSServices.provideAPIKey(googleMapsApiKey)
+        SenseSdk.enableSdkWithKey("applicationkey")
         return true
     }
 
