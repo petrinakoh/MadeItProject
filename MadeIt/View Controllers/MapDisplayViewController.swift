@@ -13,6 +13,7 @@ import RealmSwift
 
 class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
     
+    var currentAlert: Alert?
 
 //    @IBOutlet weak var destinationSearchBar: UISearchBar!
     
@@ -40,6 +41,12 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        currentAlert = Alert()
+        currentAlert!.destination = "School"
+        currentAlert!.recipient = "send to someone"
+    }
+
 
     /*
     // MARK: - Navigation

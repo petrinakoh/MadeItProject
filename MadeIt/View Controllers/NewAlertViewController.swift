@@ -11,10 +11,7 @@ import RealmSwift
 import GoogleMaps
 
 class NewAlertViewController: UIViewController {
-    
-    let viewControllerIdentifiers = ["first", "second"]
-    
-    
+
     
     var currentAlert: Alert?
 

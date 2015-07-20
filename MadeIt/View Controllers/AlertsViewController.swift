@@ -32,7 +32,7 @@ class AlertsViewController: UIViewController {
                 }
                 println("next button clicked")
                 case "Save":
-                let source = segue.sourceViewController as! NewAlertViewController
+                let source = segue.sourceViewController as! ContactsDisplayViewController
                 realm.write() {
                     realm.add(source.currentAlert!)
                 }

@@ -9,8 +9,14 @@
 import UIKit
 import AddressBook
 import AddressBookUI
+import RealmSwift
 
 class ContactsDisplayViewController: UIViewController {
+    
+    var currentAlert: Alert?
+    
+    @IBOutlet weak var tableView: UITableView!
+
     
     let addressBookRef: ABAddressBook? = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
     
@@ -44,6 +50,12 @@ class ContactsDisplayViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        currentAlert = Alert()
+        currentAlert!.destination = "School"
+        currentAlert!.recipient = "send to someone"
     }
     
     // MARK: Permissions
@@ -81,14 +93,35 @@ class ContactsDisplayViewController: UIViewController {
     
     // MARK: Show Contact List
     
+
+    
     func displayContactsList() {
         if let people = ABAddressBookCopyArrayOfAllPeople(addressBookRef)?.takeRetainedValue() as? NSArray {
             println("people")
+//        
+//            let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! UITableViewCell
+//            cell.textLabel?.text = people[indexPath.row]
+//            return cell
             
         }
     }
     
-
-
-
 }
+
+extension ContactsDisplayViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! UITableViewCell
+        
+        let row = indexPath.row
+//        cell.textLabel?.text = people[indexPath.row]
+        cell.textLabel?.text = "Test"
+        
+        return cell
+    }
+}
+
