@@ -36,6 +36,7 @@ class ContactsDisplayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
@@ -66,7 +67,7 @@ class ContactsDisplayViewController: UIViewController {
     func displayCantAccessContactsAlert() {
         let cantAccessContactsAlert = UIAlertController(title: "Cannot Access Contacts", message: "You must give the app permission to access contacts first.", preferredStyle: .Alert)
         cantAccessContactsAlert.addAction(UIAlertAction(title: "Change Settings", style: .Default, handler: {action in
-                self.openSettings()
+            self.openSettings()
         }))
         cantAccessContactsAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         presentViewController(cantAccessContactsAlert, animated: true, completion: nil)
@@ -76,6 +77,7 @@ class ContactsDisplayViewController: UIViewController {
         let url = NSURL(string: UIApplicationOpenSettingsURLString)
         UIApplication.sharedApplication().openURL(url!)
     }
+
     
     // MARK: Show Contact List
     
