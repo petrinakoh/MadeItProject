@@ -8,7 +8,6 @@
 
 import UIKit
 import AddressBook
-import AddressBookUI
 import RealmSwift
 
 class ContactsDisplayViewController: UIViewController {
@@ -96,13 +95,18 @@ class ContactsDisplayViewController: UIViewController {
 
     
     func displayContactsList() {
-        if let people = ABAddressBookCopyArrayOfAllPeople(addressBookRef)?.takeRetainedValue() as? NSArray {
-            println("people")
-//        
-//            let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! UITableViewCell
-//            cell.textLabel?.text = people[indexPath.row]
-//            return cell
-            
+        if let addressBookRef: ABAddressBook = addressBookRef {
+            if let people = ABAddressBookCopyArrayOfAllPeople(addressBookRef)?.takeRetainedValue() as? NSArray {
+                println("people")
+                //
+                //            let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! UITableViewCell
+                //            cell.textLabel?.text = people[indexPath.row]
+                //            return cell
+                
+            }
+        }
+        else {
+            println("whoops")
         }
     }
     
