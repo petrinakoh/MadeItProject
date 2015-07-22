@@ -18,6 +18,7 @@ class ContactsDisplayViewController: UITableViewController {
     
     var currentAlert: Alert?
     
+    
     // MARK: Permissions
     
     func promptForAddressBookRequestAccess() {
@@ -97,12 +98,12 @@ class ContactsDisplayViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        println("view did appear called")
+        println("ContactsDisplayVC view did appear called")
         super.viewDidAppear(true)
         
         let permission = checkPermissions()
+        println("check if permission is..")
         println(permission)
-        println("check permission")
         if permission {
             println("permission")
             displayContactsList()
@@ -136,9 +137,12 @@ extension ContactsDisplayViewController: UITableViewDataSource {
         //cell.person = contacts[indexPath.row]
         //cell.parentTableViewController = self
         
-//        let row = indexPath.row
+        let row = indexPath.row
+        let person = contacts[row]
 //        cell.textLabel?.text = people[indexPath.row]
-        cell.textLabel?.text = "Test"
+        println("at override func tableview")
+        println(person.firstName)
+        cell.textLabel?.text = "\(person.firstName) + \(person.lastName)"
         
         return cell
     }

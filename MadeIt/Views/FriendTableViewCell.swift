@@ -11,7 +11,13 @@ import UIKit
 
 class FriendTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var person: UILabel!
+    @IBOutlet weak var personLabel: UILabel!
     
-    
+    var person: AddressPerson? {
+        didSet {
+            if let person = person, personLabel = personLabel {
+                self.personLabel.text = person.firstName
+            }
+        }
+    }
 }
