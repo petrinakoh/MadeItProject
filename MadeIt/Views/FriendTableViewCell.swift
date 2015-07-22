@@ -11,7 +11,7 @@ import UIKit
 
 class FriendTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var friendCell: UILabel!
+    @IBOutlet weak var person: UILabel!
     
     
 }

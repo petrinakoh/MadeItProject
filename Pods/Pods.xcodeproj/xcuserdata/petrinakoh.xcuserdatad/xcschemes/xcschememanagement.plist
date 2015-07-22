@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-MadeIt-SwiftAddressBook.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MadeIt.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-MadeItTests-SwiftAddressBook.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MadeItTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>417E8C795011A0569D746441</key>
+		<key>114579E958D89BF361AFDB2A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6D8CF187E5B200987B8CD8A2</key>
+		<key>3CAF2CAE7C04146C88EFEA66</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>70E8FBB7803B6FE7E316B581</key>
+		<key>48419C32DD1C8C4C54DE8DCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9F8893C2A1455B5D17476912</key>
+		<key>83E111319FE062D6A8956BB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ACE42B22E646B375B9A60B1E</key>
+		<key>8F529C68CA3AF980F791A203</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E651A85AB49CF0FA6D75BCEF</key>
+		<key>95CF1CA87BC7F70A1C08010F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A0B09250C0CADACE6877AB3A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D44C5F89C4646410CFC08FAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

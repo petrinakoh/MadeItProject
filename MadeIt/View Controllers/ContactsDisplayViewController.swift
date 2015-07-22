@@ -6,67 +6,28 @@
 //  Copyright (c) 2015 Petrina Koh. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import AddressBook
+import SwiftAddressBook
 import RealmSwift
 
-class ContactsDisplayViewController: UIViewController {
+class ContactsDisplayViewController: UITableViewController {
+    
+    var contacts: [SwiftAddressBookPerson] = []
     
     var currentAlert: Alert?
     
-    @IBOutlet weak var tableView: UITableView!
-
-    
-    let addressBookRef: ABAddressBook? = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
-    
-    @IBAction func tappedAccessContacts(contactsButton: UIButton) {
-        let authorizationStatus = ABAddressBookGetAuthorizationStatus()
-        
-        switch authorizationStatus {
-        case .Denied, .Restricted:
-            //1
-            println("Denied")
-            displayCantAccessContactsAlert()
-        case .Authorized:
-            //2
-            println("Authorized")
-            displayContactsList()
-        case .NotDetermined:
-            //3
-            println("Not Determined")
-            promptForAddressBookRequestAccess(contactsButton)
-        }
-    }
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        currentAlert = Alert()
-        currentAlert!.destination = "School"
-        currentAlert!.recipient = "send to someone"
-    }
-    
     // MARK: Permissions
     
-    func promptForAddressBookRequestAccess(contactsButton: UIButton) {
+    func promptForAddressBookRequestAccess() {
         var err: Unmanaged<CFError>? = nil
-        ABAddressBookRequestAccessWithCompletion(addressBookRef) {
+        ABAddressBookRequestAccessWithCompletion(nil) {
             (granted: Bool, error: CFError!) in
             dispatch_async(dispatch_get_main_queue()) {
                 if !granted {
                     println("Just denied")
-                    self.displayCantAccessContactsAlert() // write func for this
+                    self.displayCantAccessContactsAlert()
                 } else {
                     println("Just authorized")
                     //self.displayContactsList() // write func for this
@@ -88,44 +49,102 @@ class ContactsDisplayViewController: UIViewController {
         let url = NSURL(string: UIApplicationOpenSettingsURLString)
         UIApplication.sharedApplication().openURL(url!)
     }
-
     
-    // MARK: Show Contact List
     
-
+    
+    func checkPermissions() -> Bool {
+        let authorizationStatus = ABAddressBookGetAuthorizationStatus()
+        
+        switch authorizationStatus {
+        case .Denied, .Restricted:
+            //1
+            println("Denied")
+            displayCantAccessContactsAlert()
+            return false
+        case .Authorized:
+            //2
+            println("Authorized")
+            return true
+            //addressBookRef = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
+        case .NotDetermined:
+            //3
+            println("Not Determined")
+            promptForAddressBookRequestAccess()
+            return false
+        }
+    }
+    
+    // MARK: Show Contacts List
     
     func displayContactsList() {
-        if let addressBookRef: ABAddressBook = addressBookRef {
-            if let people = ABAddressBookCopyArrayOfAllPeople(addressBookRef)?.takeRetainedValue() as? NSArray {
-                println("people")
-                //
-                //            let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! UITableViewCell
-                //            cell.textLabel?.text = people[indexPath.row]
-                //            return cell
-                
+        if let people: [SwiftAddressBookPerson] = swiftAddressBook?.allPeople {
+            for person in people {
+                println(person.nickname)
+                println(person.firstName)
+                println(person.lastName)
+                let numbers = person.phoneNumbers
+                println(numbers?.map( {$0.value} ))
+                contacts.append(person)
             }
         }
-        else {
-            println("whoops")
+    }
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        println("view did appear called")
+        super.viewDidAppear(true)
+        
+        let permission = checkPermissions()
+        println(permission)
+        println("check permission")
+        if permission {
+            println("permission")
+            displayContactsList()
+            self.tableView.reloadData()
+        } else {
+            promptForAddressBookRequestAccess()
         }
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        currentAlert = Alert()
+        currentAlert!.destination = "School"
+        currentAlert!.recipient = "send to someone"
     }
     
 }
 
 extension ContactsDisplayViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contacts.count ?? 0
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! UITableViewCell
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendTableViewCell
+        //cell.person = contacts[indexPath.row]
+        //cell.parentTableViewController = self
         
-        let row = indexPath.row
+//        let row = indexPath.row
 //        cell.textLabel?.text = people[indexPath.row]
         cell.textLabel?.text = "Test"
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 

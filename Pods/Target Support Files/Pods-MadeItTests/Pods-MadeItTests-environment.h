@@ -30,3 +30,9 @@
 #define COCOAPODS_VERSION_MINOR_RealmSwift 93
 #define COCOAPODS_VERSION_PATCH_RealmSwift 2
 
+// SwiftAddressBook
+#define COCOAPODS_POD_AVAILABLE_SwiftAddressBook
+#define COCOAPODS_VERSION_MAJOR_SwiftAddressBook 0
+#define COCOAPODS_VERSION_MINOR_SwiftAddressBook 4
+#define COCOAPODS_VERSION_PATCH_SwiftAddressBook 3
+
