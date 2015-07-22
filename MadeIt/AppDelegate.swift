@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(googleMapsApiKey)
         SenseSdk.enableSdkWithKey("5ce89061-4891-409a-8549-9c8a5cd6d57f")
+        
+        // create custom geofence
+        EnteredGeofenceDetector().geofenceDetectionStart()
+        
         return true
     }
 

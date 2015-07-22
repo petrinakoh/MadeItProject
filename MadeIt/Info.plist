@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Use location in background to check whether you have arrived at your destination</string>
+	<string>Use location in background to check whether you have arrived at your destination. This will not drain your battery.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

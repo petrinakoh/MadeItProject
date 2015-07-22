@@ -122,7 +122,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="show up wtf" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-jX-Vbr">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="show up" borderStyle="roundedRect" placeholder="Search bar show up" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-jX-Vbr">
                                 <rect key="frame" x="10" y="74" width="580" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -171,7 +171,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="showUpWtf" destination="Rz1-jX-Vbr" id="hNp-F7-YXU"/>
+                        <outlet property="showUp" destination="Rz1-jX-Vbr" id="c2n-fh-sYY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXS-md-ExU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -193,16 +193,25 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7nQ-Y9-yaj" id="vrV-un-F2y">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oZ-eq-3iH">
-                                            <rect key="frame" x="25" y="11" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWs-cm-H6j">
+                                            <rect key="frame" x="22" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="1" green="0.3097077915" blue="0.31964226309999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWr-H0-hav">
+                                            <rect key="frame" x="225" y="8" width="124" height="30"/>
+                                            <state key="normal" title="triggerGeofence">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="triggerGeofence:" destination="L94-2a-A5H" eventType="touchUpInside" id="see-0J-XMZ"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="person" destination="7oZ-eq-3iH" id="4ZM-B1-DrG"/>
+                                    <outlet property="personLabel" destination="fWs-cm-H6j" id="wLs-uJ-zH9"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -222,7 +231,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Hd-oN-VdY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Zwq-bc-AgF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1826" y="1034"/>
+            <point key="canvasLocation" x="2116" y="290"/>
         </scene>
     </scenes>
 </document>

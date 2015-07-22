@@ -15,9 +15,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
     
     var currentAlert: Alert?
 
-    @IBOutlet weak var destinationSearchBar: UISearchBar!
-
-    @IBOutlet weak var showUpWtf: UITextField!
+    @IBOutlet weak var showUp: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +23,12 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
         var camera = GMSCameraPosition.cameraWithLatitude(-33.868, longitude: 151.2086, zoom: 6)
         
         // Trying to get label over the mapView
-        var mapView = GMSMapView.mapWithFrame(CGRectMake(0, 0, 100, 100),     camera:camera)
+        var mapView = GMSMapView.mapWithFrame(CGRectMake(50,50, 100, 100),     camera:camera)
         //mapView.delegate = self
         self.view.insertSubview(mapView, atIndex:0)
         //self.view = mapView
-        self.view.addSubview(showUpWtf)
-        self.view.bringSubviewToFront(showUpWtf)
+        self.view.addSubview(showUp)
+        self.view.bringSubviewToFront(showUp)
         
         // Marker
         var marker = GMSMarker()
@@ -39,6 +37,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = mapView
         self.view = mapView
+        println("mapview")
         
         // Do any additional setup after loading the view.
     }
