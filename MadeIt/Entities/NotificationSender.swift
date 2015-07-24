@@ -25,4 +25,5 @@ class NotificationSender {
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         
     }
+
 }

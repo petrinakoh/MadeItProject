@@ -13,6 +13,7 @@ import RealmSwift
 
 class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
     
+    @IBOutlet weak var mapView: GMSMapView!
     var currentAlert: Alert?
 
     @IBOutlet weak var showUp: UITextField!
@@ -23,7 +24,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
         var camera = GMSCameraPosition.cameraWithLatitude(-33.868, longitude: 151.2086, zoom: 6)
         
         // Trying to get label over the mapView
-        var mapView = GMSMapView.mapWithFrame(CGRectMake(50,50, 100, 100),     camera:camera)
+        mapView.camera = camera
         //mapView.delegate = self
         self.view.insertSubview(mapView, atIndex:0)
         //self.view = mapView
@@ -36,7 +37,6 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
         marker.snippet = "frustration"
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = mapView
-        self.view = mapView
         println("mapview")
         
         // Do any additional setup after loading the view.

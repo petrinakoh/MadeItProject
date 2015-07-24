@@ -160,7 +160,7 @@ extension ContactsDisplayViewController: UITableViewDataSource {
 //        cell.textLabel?.text = people[indexPath.row]
         println("at override func tableview")
         println(person.firstName)
-        cell.textLabel?.text = "\(person.firstName) + \(person.lastName)"
+        cell.textLabel?.text = person.firstName
         
         return cell
     }
