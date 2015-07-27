@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import GoogleMaps
 import RealmSwift
+import CoreLocation
 
-class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
+class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     
     let realm = Realm()
     
@@ -19,6 +20,9 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
     var currentAlert: Alert?
 
     @IBOutlet weak var showUp: UITextField!
+    
+    var locationManager = CLLocationManager()
+    var didFindMyLocation = false
     
     // Search box
     var savedDestination: String!
@@ -29,23 +33,43 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
         println(savedDestination)
         return false
     }
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        if !didFindMyLocation {
+            let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
+            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
+            mapView.settings.myLocationButton = true
+            
+            didFindMyLocation = true
+        }
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         println("map view did load")
         
-        var camera = GMSCameraPosition.cameraWithLatitude(-33.868, longitude: 151.2086, zoom: 17)
-        mapView.camera = camera
+        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
-        // Marker
-        var marker = GMSMarker()
-        marker.position = camera.target
-        marker.snippet = "Destination"
-        marker.appearAnimation = kGMSMarkerAnimationPop
-        marker.map = mapView
+//        var camera = GMSCameraPosition.cameraWithLatitude(-33.868, longitude: 151.2086, zoom: 6)
+//        mapView.camera = camera
+//        
+//        // Marker
+//        var marker = GMSMarker()
+//        marker.position = camera.target
+//        marker.snippet = "Destination"
+//        marker.appearAnimation = kGMSMarkerAnimationPop
+//        marker.map = mapView
         
-        // Do any additional setup after loading the view.
+        // Location manager
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+    }
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.AuthorizedAlways {
+            mapView.myLocationEnabled = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +99,12 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
         cdvc.destination = savedDestination
 
     }
-
-
+    
+    override func viewWillDisappear(animated: Bool) {
+        if mapView.observationInfo != nil {
+            mapView.removeObserver(self, forKeyPath: "myLocation")
+        }
+        
+    }
 
 }
