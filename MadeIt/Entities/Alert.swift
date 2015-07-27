@@ -12,6 +12,14 @@ import RealmSwift
 class Alert : Object {
     
     dynamic var destination: String = ""
-    dynamic var recipient: String = ""
+    dynamic var name: String? = ""
+    dynamic var phone: String? = ""
+    
+    convenience init(destination: String, name: String, phone: String) {
+        self.init()
+        self.destination = destination
+        self.name = name
+        self.phone = phone
+    }
     
 }

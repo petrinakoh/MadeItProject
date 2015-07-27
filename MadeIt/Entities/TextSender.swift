@@ -25,7 +25,7 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
             var messageVC = MFMessageComposeViewController()
             
             messageVC.body = "Enter a message"
-            messageVC.recipients = [phoneNumber.text]
+            messageVC.recipients = ["555-610-6679"]
             messageVC.messageComposeDelegate = self
             
             self.presentViewController(messageVC, animated: false, completion: nil)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RmZ-6C-8l1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ovh-1m-wm7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -113,7 +113,7 @@
         <!--Map Display View Controller-->
         <scene sceneID="Oj0-a8-S3X">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="QqX-Qy-hha" userLabel="Map Display View Controller" customClass="MapDisplayViewController" customModule="MadeIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Map" automaticallyAdjustsScrollViewInsets="NO" id="QqX-Qy-hha" userLabel="Map Display View Controller" customClass="MapDisplayViewController" customModule="MadeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CWy-KJ-7sh"/>
                         <viewControllerLayoutGuide type="bottom" id="S5t-AN-BVJ"/>
@@ -129,11 +129,17 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="QqX-Qy-hha" id="FOL-1F-tCb"/>
+                                </connections>
                             </textField>
                             <view opaque="NO" alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zhU-pT-Ycc" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="104" width="600" height="452"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <connections>
+                                    <outlet property="delegate" destination="QqX-Qy-hha" id="Rkt-0H-Xmw"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -173,25 +179,19 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Enter Destination" id="cqe-aW-tQs" userLabel="Enter Destination">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nfD-KR-qSV">
-                            <connections>
-                                <segue destination="dTf-gd-3lb" kind="unwind" identifier="Cancel" unwindAction="unwindToSegue:" id="h4J-n7-lzw"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Next" id="UNX-Wg-A0W">
                             <connections>
-                                <segue destination="L94-2a-A5H" kind="show" id="MXa-v3-PpP"/>
+                                <segue destination="L94-2a-A5H" kind="show" identifier="Next" id="MXa-v3-PpP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="zhU-pT-Ycc" id="JjH-S3-LBY"/>
-                        <outlet property="showUp" destination="Rz1-jX-Vbr" id="c2n-fh-sYY"/>
+                        <outlet property="showUp" destination="Rz1-jX-Vbr" id="g5X-QZ-Y4L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXS-md-ExU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="dTf-gd-3lb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1352" y="290"/>
         </scene>
@@ -203,6 +203,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="t4r-So-PPC">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendCell" id="7nQ-Y9-yaj" customClass="FriendTableViewCell" customModule="MadeIt" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -239,10 +244,13 @@
                     <navigationItem key="navigationItem" title="Who to Alert" id="iLZ-rd-nhB">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="DUz-nQ-qwU">
                             <connections>
-                                <segue destination="Zwq-bc-AgF" kind="unwind" identifier="Save" unwindAction="unwindToSegue:" id="4LG-hh-aRI"/>
+                                <segue destination="Zwq-bc-AgF" kind="unwind" identifier="Save" unwindAction="unwindToSegue:" id="cD6-cg-3dt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchContacts" destination="t4r-So-PPC" id="YO6-oe-Ll8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Hd-oN-VdY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Zwq-bc-AgF" userLabel="Exit" sceneMemberID="exit"/>

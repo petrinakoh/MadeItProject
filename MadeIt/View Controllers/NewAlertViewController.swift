@@ -31,7 +31,7 @@ class NewAlertViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         currentAlert = Alert()
         currentAlert!.destination = "School"
-        currentAlert!.recipient = "send to someone"
+        currentAlert!.name = "send to someone"
     }
     
 

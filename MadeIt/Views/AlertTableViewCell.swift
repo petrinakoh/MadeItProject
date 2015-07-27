@@ -19,7 +19,7 @@ class AlertTableViewCell: UITableViewCell {
         didSet {
             if let alert = alert, destinationLabel = destinationLabel, recipientLabel = recipientLabel {
                 self.destinationLabel.text = alert.destination
-                self.recipientLabel.text = alert.recipient
+                self.recipientLabel.text = alert.name
             }
         }
     }

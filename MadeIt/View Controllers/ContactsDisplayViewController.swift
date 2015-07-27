@@ -15,9 +15,33 @@ import SenseSdk
 
 class ContactsDisplayViewController: UITableViewController {
     
-    var contacts: [SwiftAddressBookPerson] = []
+    var destination: String!
     
-    var currentAlert: Alert?
+    var selectedPerson: AddressPerson?
+    
+    @IBOutlet weak var searchContacts: UISearchBar!
+    
+    enum State {
+        case DefaultMode
+        case SearchMode
+    }
+
+    var state: State = .DefaultMode
+    
+    var contactStorage: [AddressPerson] = []
+    var contactsToDisplay: [AddressPerson] = []
+    
+    var currentAlert: Alert!
+    
+    // MARK: Test geofence trigger
+    
+    func saveToDisplay(stuffToStore: [AddressPerson]) {
+        self.contactsToDisplay = stuffToStore
+        self.contactsToDisplay.sort {
+            $0.name.localizedCaseInsensitiveCompare($1.name) == NSComparisonResult.OrderedAscending
+        }
+        self.tableView.reloadData()
+    }
     
     @IBAction func triggerGeofence(sender: UIButton) {
         
@@ -49,7 +73,8 @@ class ContactsDisplayViewController: UITableViewController {
                     self.displayCantAccessContactsAlert()
                 } else {
                     println("Just authorized")
-                    //self.displayContactsList() // write func for this
+                    self.contactStorage = self.getContacts()
+                    self.saveToDisplay(self.contactStorage)
                 }
             }
         }
@@ -95,22 +120,39 @@ class ContactsDisplayViewController: UITableViewController {
     
     // MARK: Show Contacts List
     
-    func displayContactsList() {
+    func getContacts() -> [AddressPerson] {
+        var contactsToReturn: [AddressPerson] = []
         if let people: [SwiftAddressBookPerson] = swiftAddressBook?.allPeople {
             for person in people {
-                println(person.nickname)
-                println(person.firstName)
-                println(person.lastName)
+//                println(person.nickname)
+//                println(person.firstName)
+//                println(person.lastName)
                 let numbers = person.phoneNumbers
-                println(numbers?.map( {$0.value} ))
-                contacts.append(person)
+//                println(numbers?.map( {$0.value} ))
+                
+                let p = AddressPerson()
+                if let firstName = person.firstName {
+                    p.firstName = firstName
+                }
+                if let lastName = person.lastName {
+                    p.lastName = lastName
+                }
+                if let phoneNumbers = person.phoneNumbers {
+                    p.phone = phoneNumbers[0].value
+                }
+                
+                contactsToReturn.append(p)
             }
         }
+        return contactsToReturn
     }
 
 
     override func viewDidLoad() {
+        println("viewdidload ContactsDisplayViewController")
+        searchContacts.delegate = self
         super.viewDidLoad()
+        println(destination)
         
         // Do any additional setup after loading the view.
     }
@@ -120,12 +162,12 @@ class ContactsDisplayViewController: UITableViewController {
         super.viewDidAppear(true)
         
         let permission = checkPermissions()
-        println("check if permission is..")
-        println(permission)
+//        println("check if permission is..")
+//        println(permission)
         if permission {
             println("permission")
-            displayContactsList()
-            self.tableView.reloadData()
+            contactStorage = getContacts()
+            saveToDisplay(contactStorage)
         } else {
             promptForAddressBookRequestAccess()
         }
@@ -136,18 +178,64 @@ class ContactsDisplayViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        currentAlert = Alert()
-        currentAlert!.destination = "School"
-        currentAlert!.recipient = "send to someone"
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        println("shouldPerformSegueWithIdentifier")
+        
+        if(identifier == "Save") {
+            if let p = selectedPerson {
+                println("there is a person")
+                return true
+            } else {
+                println("there is no person")
+                return false
+            }
+        } else {
+            return false
+        }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "Save") {
+            // this goes back to the main dashboard
+            currentAlert = Alert(destination: destination, name: selectedPerson!.name, phone: selectedPerson!.phone)
+            
+        }
+    }
+    // Search for Contact
+    
+    func searchContacts(contacts: [AddressPerson], searchString: String) -> [AddressPerson] {
+        println("searchContacts")
+        if searchString == "" {
+            return contacts
+        }
+        var peopleThatMatch: [AddressPerson] = []
+        for person in contacts {
+            if checkString(person.name, searchString: searchString) {
+                peopleThatMatch.append(person)
+            }
+        }
+        println(peopleThatMatch)
+        return peopleThatMatch
+    }
+    
+    func checkString(str: String, searchString: String) -> Bool {
+        if str.lowercaseString.rangeOfString(searchString) != nil {
+            println("exists")
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
+
     
 }
 
 extension ContactsDisplayViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count ?? 0
+        return contactsToDisplay.count ?? 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -156,17 +244,39 @@ extension ContactsDisplayViewController: UITableViewDataSource {
         //cell.parentTableViewController = self
         
         let row = indexPath.row
-        let person = contacts[row]
+        let person = contactsToDisplay[row]
 //        cell.textLabel?.text = people[indexPath.row]
         println("at override func tableview")
         println(person.firstName)
-        cell.textLabel?.text = person.firstName
+        cell.textLabel?.text = "\(person.firstName) \(person.lastName)"
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        println("didSelectRowAtIndexPath")
+        selectedPerson = contactsToDisplay[indexPath.row]
+        println(selectedPerson)
     }
 }
 
+extension ContactsDisplayViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        println("searchbar text did begin editing")
+        state = .SearchMode
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        println("Search bar cancel button clicked")
+        state = .DefaultMode
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        println("searchBar func")
+        print("contacts to display")
+        println(contactsToDisplay)
+        
+        saveToDisplay(searchContacts(contactStorage, searchString: searchText))
+    }
+}

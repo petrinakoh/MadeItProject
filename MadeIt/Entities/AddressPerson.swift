@@ -15,4 +15,8 @@ class AddressPerson : Object {
     
     dynamic var firstName: String = ""
     dynamic var lastName: String = ""
+    dynamic var phone: String = ""
+    dynamic var name: String {
+        return firstName + lastName
+    }
 }

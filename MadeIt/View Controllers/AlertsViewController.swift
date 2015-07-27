@@ -26,15 +26,18 @@ class AlertsViewController: UIViewController {
             let realm = Realm()
             switch identifier {
                 case "Next":
-                let source = segue.sourceViewController as! NewAlertViewController
+                let source = segue.sourceViewController as! MapDisplayViewController
                 realm.write() {
                     realm.add(source.currentAlert!)
                 }
                 println("next button clicked")
                 case "Save":
                 let source = segue.sourceViewController as! ContactsDisplayViewController
+                
+                let newPerson = source.select
+                
                 realm.write() {
-                    realm.add(source.currentAlert!)
+                    realm.add(source.currentAlert)
                 }
                 println("save button clicked")
                 
@@ -100,6 +103,7 @@ extension AlertsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //selectedAlert = alerts[indexPath.row]
         //self.performSegueWithIdentifier("ShowExistingAlert", sender: self)
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

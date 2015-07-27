@@ -13,31 +13,37 @@ import RealmSwift
 
 class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
     
+    let realm = Realm()
+    
     @IBOutlet weak var mapView: GMSMapView!
     var currentAlert: Alert?
 
     @IBOutlet weak var showUp: UITextField!
     
+    // Search box
+    var savedDestination: String!
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        savedDestination = textField.text
+        textField.resignFirstResponder()
+        println(savedDestination)
+        return false
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("map view did load")
         
-        var camera = GMSCameraPosition.cameraWithLatitude(-33.868, longitude: 151.2086, zoom: 6)
-        
-        // Trying to get label over the mapView
+        var camera = GMSCameraPosition.cameraWithLatitude(-33.868, longitude: 151.2086, zoom: 17)
         mapView.camera = camera
-        //mapView.delegate = self
-        self.view.insertSubview(mapView, atIndex:0)
-        //self.view = mapView
-        self.view.addSubview(showUp)
-        self.view.bringSubviewToFront(showUp)
         
         // Marker
         var marker = GMSMarker()
         marker.position = camera.target
-        marker.snippet = "frustration"
+        marker.snippet = "Destination"
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = mapView
-        println("mapview")
         
         // Do any additional setup after loading the view.
     }
@@ -47,21 +53,29 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        println("shouldPerformSegueWithIdentifier")
+        
+        if(identifier == "Next") {
+            if let d = savedDestination {
+                println("there is a destination")
+                return true
+            } else {
+                println("there is no destination")
+                return false
+            }
+        } else {
+            return true
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        currentAlert = Alert()
-        currentAlert!.destination = "School"
-        currentAlert!.recipient = "send to someone"
+        println("prepareForSegue")
+        var cdvc = segue.destinationViewController as! ContactsDisplayViewController
+        cdvc.destination = savedDestination
+
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

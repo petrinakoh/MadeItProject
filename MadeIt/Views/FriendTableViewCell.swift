@@ -8,12 +8,13 @@
 
 import Foundation
 import UIKit
+import SwiftAddressBook
 
 class FriendTableViewCell: UITableViewCell {
     
     @IBOutlet weak var personLabel: UILabel!
     
-    var person: AddressPerson? {
+    var person: SwiftAddressBookPerson? {
         didSet {
             if let person = person, personLabel = personLabel {
                 self.personLabel.text = person.firstName
