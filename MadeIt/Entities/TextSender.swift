@@ -9,13 +9,34 @@
 import Foundation
 import UIKit
 import MessageUI
+import SenseSdk
 
 class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
     
-    @IBOutlet weak var phoneNumber: UITextField!
+    var selectedPerson: AddressPerson?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: Test geofence trigger
+    
+    @IBAction func triggerGeofence(sender: UIButton) {
+        
+        // create two geofences
+        let hq = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Headquarters")
+        let lunchSpot = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Grill")
+        
+        let errorPointer = SenseSdkErrorPointer.create()
+        if errorPointer.error != nil {
+            NSLog("Error!: \(errorPointer.error.message)")
+        }
+        
+        // for testing
+        SenseSdkTestUtility.fireTrigger(fromRecipe: "ArrivedAtGeofence", confidenceLevel: ConfidenceLevel.Medium, places: [hq, lunchSpot], errorPtr: errorPointer)
+        if errorPointer.error != nil {
+            NSLog("Error sending trigger")
+        }
     }
     
     @IBAction func sendMessage(sender: UIButton) {
@@ -24,8 +45,8 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
             println("inside if statement")
             var messageVC = MFMessageComposeViewController()
             
-            messageVC.body = "Enter a message"
-            messageVC.recipients = ["555-610-6679"]
+            messageVC.body = "Made it!"
+            messageVC.recipients = [selectedPerson!.phone]
             messageVC.messageComposeDelegate = self
             
             self.presentViewController(messageVC, animated: false, completion: nil)

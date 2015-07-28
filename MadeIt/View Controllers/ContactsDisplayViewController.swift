@@ -33,8 +33,6 @@ class ContactsDisplayViewController: UITableViewController {
     
     var currentAlert: Alert!
     
-    // MARK: Test geofence trigger
-    
     func saveToDisplay(stuffToStore: [AddressPerson]) {
         self.contactsToDisplay = stuffToStore
         self.contactsToDisplay.sort {
@@ -43,24 +41,7 @@ class ContactsDisplayViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    @IBAction func triggerGeofence(sender: UIButton) {
-        
-        // create two geofences
-        let hq = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Headquarters")
-        let lunchSpot = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Grill")
-        
-        let errorPointer = SenseSdkErrorPointer.create()
-        if errorPointer.error != nil {
-            NSLog("Error!: \(errorPointer.error.message)")
-        }
-        
-        // for testing 
-        SenseSdkTestUtility.fireTrigger(fromRecipe: "ArrivedAtGeofence", confidenceLevel: ConfidenceLevel.Medium, places: [hq, lunchSpot], errorPtr: errorPointer)
-        if errorPointer.error != nil {
-            NSLog("Error sending trigger")
-        }
-    }
-    
+   
     // MARK: Permissions
     
     func promptForAddressBookRequestAccess() {

@@ -1601,6 +1601,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0640;
+				TargetAttributes = {
+					3CAF2CAE7C04146C88EFEA66 = {
+						DevelopmentTeam = WK3VAH28UA;
+					};
+				};
 			};
 			buildConfigurationList = F842AFD7EE92E2E071FBE358 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1884,6 +1889,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C9F58B47D853F517355ABE5 /* Pods-MadeIt-SwiftAddressBook-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1899,6 +1905,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-MadeIt-SwiftAddressBook/Pods-MadeIt-SwiftAddressBook.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = SwiftAddressBook;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2201,6 +2208,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C9F58B47D853F517355ABE5 /* Pods-MadeIt-SwiftAddressBook-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2216,6 +2224,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-MadeIt-SwiftAddressBook/Pods-MadeIt-SwiftAddressBook.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = SwiftAddressBook;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

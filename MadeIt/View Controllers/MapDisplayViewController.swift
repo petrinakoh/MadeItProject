@@ -24,24 +24,62 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
     var locationManager = CLLocationManager()
     var didFindMyLocation = false
     
+    var mapTasks = MapTasks()
+    var locationMarker: GMSMarker!
+    
     // Search box
+    var searchedDestination: String!
     var savedDestination: String!
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        savedDestination = textField.text
+        searchedDestination = textField.text
+        //savedDestination = textField.text
+        self.mapTasks.geocodeAddress(searchedDestination, withCompletionHandler: { (status, success) -> Void in
+            if !success {
+                println(status)
+                
+                if status == "ZERO_RESULTS" {
+                    println("No location found")
+                }
+            } else {
+                let coordinate = CLLocationCoordinate2D(latitude: self.mapTasks.fetchedAddressLatitude, longitude: self.mapTasks.fetchedAddressLongitude)
+                self.mapView.camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 14.0)
+                self.setupLocationMarker(coordinate)
+                self.savedDestination = self.mapTasks.fetchedFormattedAddress
+                println("after geocoding")
+                println(self.savedDestination)
+            }
+        })
         textField.resignFirstResponder()
-        println(savedDestination)
+        println(searchedDestination)
         return false
     }
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
-            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
+            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
             mapView.settings.myLocationButton = true
             
             didFindMyLocation = true
         }
+    }
+    
+    func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
+        if locationMarker != nil {
+            locationMarker.map = nil
+        }
+        
+        locationMarker = GMSMarker(position: coordinate)
+        locationMarker.map = mapView
+        
+        locationMarker.title = mapTasks.fetchedFormattedAddress
+        locationMarker.appearAnimation = kGMSMarkerAnimationPop
+        //locationMarker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+        locationMarker.opacity = 0.85
+        
+        locationMarker.flat = true
+        locationMarker.snippet = "Your destination"
     }
 
     
@@ -50,16 +88,6 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
         println("map view did load")
         
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
-        
-//        var camera = GMSCameraPosition.cameraWithLatitude(-33.868, longitude: 151.2086, zoom: 6)
-//        mapView.camera = camera
-//        
-//        // Marker
-//        var marker = GMSMarker()
-//        marker.position = camera.target
-//        marker.snippet = "Destination"
-//        marker.appearAnimation = kGMSMarkerAnimationPop
-//        marker.map = mapView
         
         // Location manager
         locationManager.delegate = self
@@ -81,7 +109,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
         println("shouldPerformSegueWithIdentifier")
         
         if(identifier == "Next") {
-            if let d = savedDestination {
+            if let d = searchedDestination {
                 println("there is a destination")
                 return true
             } else {
@@ -95,6 +123,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         println("prepareForSegue")
+        println(savedDestination)
         var cdvc = segue.destinationViewController as! ContactsDisplayViewController
         cdvc.destination = savedDestination
 
