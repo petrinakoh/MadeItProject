@@ -17,6 +17,7 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("text sender viewdidload")
     }
     
     // MARK: Test geofence trigger
@@ -46,7 +47,7 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
             var messageVC = MFMessageComposeViewController()
             
             messageVC.body = "Made it!"
-            messageVC.recipients = [selectedPerson!.phone]
+            messageVC.recipients = ["718-564-9360", "217-898-7054"]
             messageVC.messageComposeDelegate = self
             
             self.presentViewController(messageVC, animated: false, completion: nil)

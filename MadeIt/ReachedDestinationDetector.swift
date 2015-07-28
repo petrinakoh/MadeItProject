@@ -11,11 +11,15 @@ import SenseSdk
 
 class EnteredGeofenceDetector: RecipeFiredDelegate {
     
+    var savedDestination: String!
+    
     func geofenceDetectionStart() {
+        println("geofence detection func")
+        println(savedDestination)
         let errorPointer = SenseSdkErrorPointer.create()
         
         //create two geofences
-        let hq = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Headquarters")
+        let hq  = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Headquarters")
         let lunchSpot = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Grill")
         
         // Fire when the user reaches destination

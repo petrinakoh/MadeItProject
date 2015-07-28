@@ -191,16 +191,20 @@ class ContactsDisplayViewController: UITableViewController {
         }
         var peopleThatMatch: [AddressPerson] = []
         for person in contacts {
+            println("in for loop")
             if checkString(person.name, searchString: searchString) {
                 peopleThatMatch.append(person)
+                println("inside if statement")
+                println(peopleThatMatch)
             }
         }
+        println("Printing people that match")
         println(peopleThatMatch)
         return peopleThatMatch
     }
     
     func checkString(str: String, searchString: String) -> Bool {
-        if str.lowercaseString.rangeOfString(searchString) != nil {
+        if str.lowercaseString.rangeOfString(searchString.lowercaseString) != nil {
             println("exists")
             return true
         } else {
@@ -256,7 +260,7 @@ extension ContactsDisplayViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         println("searchBar func")
         print("contacts to display")
-        println(contactsToDisplay)
+        //println(contactsToDisplay)
         
         saveToDisplay(searchContacts(contactStorage, searchString: searchText))
     }
