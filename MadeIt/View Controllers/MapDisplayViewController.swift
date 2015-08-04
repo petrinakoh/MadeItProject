@@ -31,6 +31,9 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
     var searchedDestination: String!
     var savedDestination: String!
     
+    var destLat: Double!
+    var destLong: Double!
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         searchedDestination = textField.text
         //savedDestination = textField.text
@@ -40,12 +43,16 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
                 
                 if status == "ZERO_RESULTS" {
                     println("No location found")
+                    let errorMessage = UIAlertView(title: "Sorry", message: "Unable to find address. Please try again", delegate: self, cancelButtonTitle: "OK")
+                    errorMessage.show()
                 }
             } else {
                 let coordinate = CLLocationCoordinate2D(latitude: self.mapTasks.fetchedAddressLatitude, longitude: self.mapTasks.fetchedAddressLongitude)
                 self.mapView.camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 14.0)
                 self.setupLocationMarker(coordinate)
                 self.savedDestination = self.mapTasks.fetchedFormattedAddress
+                self.destLat = self.mapTasks.fetchedAddressLatitude
+                self.destLong = self.mapTasks.fetchedAddressLongitude
                 println("after geocoding")
                 println(self.savedDestination)
             }
@@ -124,8 +131,12 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         println("prepareForSegue")
         println(savedDestination)
+        println("DestLat is \(destLat)")
+        println("DestLong is \(destLong)")
         var cdvc = segue.destinationViewController as! ContactsDisplayViewController
         cdvc.destination = savedDestination
+        cdvc.destLat = destLat
+        cdvc.destLong = destLong
 
     }
     

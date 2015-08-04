@@ -8,26 +8,62 @@
 
 import UIKit
 import SenseSdk
+import RealmSwift
 
 class EnteredGeofenceDetector: RecipeFiredDelegate {
     
+    var alerts: Results<Alert>! 
+    
     var savedDestination: String!
+    
+    var destinationAddress: CustomGeofence!
     
     func geofenceDetectionStart() {
         println("geofence detection func")
         println(savedDestination)
+        
         let errorPointer = SenseSdkErrorPointer.create()
         
+//        // For actual alert destinations
+//        let realm = Realm()
+//        alerts = realm.objects(Alert)
+//        for alert in alerts {
+//            if alert.active {
+//                let destinationAddress = CustomGeofence(latitude: alert.destLat, longitude: alert.destLong, radius: 50, customIdentifier: "destinationAddress")
+//                println("address is \(alert.destination)")
+//                println("destLat is \(alert.destLat)")
+//                println("destLong is \(alert.destLong)")
+//                
+//                let trigger: Trigger? = FireTrigger.whenEntersGeofences([destinationAddress, destinationAddress])
+//                
+//                if let geofenceTrigger = trigger {
+//                    let geofenceRecipe = Recipe(name: "ArrivedAtGeofence", trigger: geofenceTrigger, timeWindow: TimeWindow.allDay)
+//                    
+//                    SenseSdk.register(recipe: geofenceRecipe, delegate: self)
+//                }
+//                
+//                if errorPointer.error != nil {
+//                    NSLog("Error!: \(errorPointer.error.message)")
+//                }
+//            }
+//        }
+        
+
+           
+        
+    
+    
         //create two geofences
-        let hq  = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Headquarters")
-        let lunchSpot = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Grill")
+        
+        let hq  = CustomGeofence(latitude: 37.774841, longitude: -122.400425, radius: 50, customIdentifier: "Headquarters")
+//        let lunchSpot = CustomGeofence(latitude: 37.774841, longitude: -122.400425, radius: 50, customIdentifier: "Grill")
         
         // Fire when the user reaches destination
-        let trigger: Trigger? = FireTrigger.whenEntersGeofences([hq, lunchSpot])
+        let trigger: Trigger? = FireTrigger.whenEntersGeofences([hq])
         
         if let geofenceTrigger = trigger {
             // Recipe defines what trigger, what time of day, and how long to wait between consecutive firings
-            let geofenceRecipe = Recipe(name: "ArrivedAtGeofence", trigger: geofenceTrigger, timeWindow: TimeWindow.allDay, cooldown: Cooldown.create(oncePer: 1, frequency: CooldownTimeUnit.Days)!)
+            let geofenceRecipe = Recipe(name: "ArrivedAtGeofence", trigger: geofenceTrigger, timeWindow: TimeWindow.allDay)
             
             // Register the unique recipe
             SenseSdk.register(recipe: geofenceRecipe, delegate: self)
@@ -36,12 +72,16 @@ class EnteredGeofenceDetector: RecipeFiredDelegate {
         if errorPointer.error != nil {
             NSLog("Error!: \(errorPointer.error.message)")
         }
+        
+        
     }
-    
+
+
     @objc func recipeFired(args: RecipeFiredArgs) {
         // user entered destination
         NSLog("Recipe \(args.recipe.name) fired at \(args.timestamp).");
         for trigger in args.triggersFired {
+            TextSender().sendTextMessage()
             for place in trigger.places {
                 NSLog(place.description)
                 let transitionDesc = args.recipe.trigger.transitionType.description

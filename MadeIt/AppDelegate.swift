@@ -34,15 +34,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        
+        EnteredGeofenceDetector().geofenceDetectionStart()
+        println("Application will resign")
+
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
+        // CHECK LOCATION ENABLED
+        
+        let locationAuthorizationStatus = CLLocationManager.authorizationStatus()
+        println(locationAuthorizationStatus)
+        switch locationAuthorizationStatus {
+        case .Denied, .Restricted, .NotDetermined:
+            let enableLocationMessage = UIAlertController(title: "Wait!", message: "Location services is not enabled. Please allow access in order to detect your arrival at destination", preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            enableLocationMessage.addAction(cancelAction)
+            let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+                if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.sharedApplication().openURL(url)
+                }
+            }
+            enableLocationMessage.addAction(openAction)
+            
+            self.window?.rootViewController?.presentViewController(enableLocationMessage, animated: true, completion: nil)
+            
+        default:
+            break
+        }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {

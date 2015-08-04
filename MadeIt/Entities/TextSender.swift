@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 import MessageUI
+import RealmSwift
 import SenseSdk
 
 class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
     
-    var selectedPerson: AddressPerson?
+    var alerts: Results<Alert>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +25,12 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
     
     @IBAction func triggerGeofence(sender: UIButton) {
         
+        println("trigger geofence button pressed")
+        
+        
         // create two geofences
-        let hq = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Headquarters")
-        let lunchSpot = CustomGeofence(latitude: 37.124, longitude: -127.456, radius: 50, customIdentifier: "Grill")
+        let hq = CustomGeofence(latitude: 37.774841, longitude: -122.400425, radius: 50, customIdentifier: "Headquarters")
+//        let lunchSpot = CustomGeofence(latitude: 37.774841, longitude: -122.400425, radius: 50, customIdentifier: "Grill")
         
         let errorPointer = SenseSdkErrorPointer.create()
         if errorPointer.error != nil {
@@ -34,9 +38,10 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
         }
         
         // for testing
-        SenseSdkTestUtility.fireTrigger(fromRecipe: "ArrivedAtGeofence", confidenceLevel: ConfidenceLevel.Medium, places: [hq, lunchSpot], errorPtr: errorPointer)
+        SenseSdkTestUtility.fireTrigger(fromRecipe: "ArrivedAtGeofence", confidenceLevel: ConfidenceLevel.Medium, places: [hq], errorPtr: errorPointer)
         if errorPointer.error != nil {
             NSLog("Error sending trigger")
+            println(errorPointer.error)
         }
     }
     
@@ -47,7 +52,7 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
             var messageVC = MFMessageComposeViewController()
             
             messageVC.body = "Made it!"
-            messageVC.recipients = ["718-564-9360", "217-898-7054"]
+            messageVC.recipients = ["217-898-7054"]
             messageVC.messageComposeDelegate = self
             
             self.presentViewController(messageVC, animated: false, completion: nil)
@@ -55,17 +60,39 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
 
     }
     
+    func sendTextMessage() {
+        println("func sendTextMessage called")
+        if (MFMessageComposeViewController.canSendText()) {
+            println("inside if statement")
+            var messageVC = MFMessageComposeViewController()
+            
+            messageVC.body = "Made it!"
+            messageVC.recipients = ["217-898-7054"]
+            messageVC.messageComposeDelegate = self
+
+//            self.presentViewController(messageVC, animated: false, completion: nil)
+            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(messageVC, animated: false, completion: nil)
+        }
+        
+    }
+    
     func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
         switch (result.value) {
         case MessageComposeResultCancelled.value:
             println("Message was cancelled")
+//            UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+
             self.dismissViewControllerAnimated(true, completion: nil)
         case MessageComposeResultFailed.value:
             println("Message failed")
-            self.dismissViewControllerAnimated(true, completion: nil)
+            UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+
+            //self.dismissViewControllerAnimated(true, completion: nil)
         case MessageComposeResultSent.value:
             println("Message was sent")
-            self.dismissViewControllerAnimated(true, completion: nil)
+            UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+
+            //self.dismissViewControllerAnimated(true, completion: nil)
         default:
             break;
         }

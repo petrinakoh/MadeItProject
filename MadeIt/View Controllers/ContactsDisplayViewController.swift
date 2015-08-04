@@ -17,6 +17,9 @@ class ContactsDisplayViewController: UITableViewController {
     
     var destination: String!
     
+    var destLat: Double!
+    var destLong: Double!
+    
     var selectedPerson: AddressPerson?
     
     @IBOutlet weak var searchContacts: UISearchBar!
@@ -146,7 +149,7 @@ class ContactsDisplayViewController: UITableViewController {
 //        println("check if permission is..")
 //        println(permission)
         if permission {
-            println("permission")
+            println("permission granted")
             contactStorage = getContacts()
             saveToDisplay(contactStorage)
         } else {
@@ -159,12 +162,15 @@ class ContactsDisplayViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         println("shouldPerformSegueWithIdentifier")
         
         if(identifier == "Save") {
             if let p = selectedPerson {
                 println("there is a person")
+                // check location authorization status
                 return true
             } else {
                 println("there is no person")
@@ -178,8 +184,7 @@ class ContactsDisplayViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "Save") {
             // this goes back to the main dashboard
-            currentAlert = Alert(destination: destination, name: selectedPerson!.name, phone: selectedPerson!.phone)
-            
+            currentAlert = Alert(destination: destination, name: selectedPerson!.name, phone: selectedPerson!.phone, destLong: destLong, destLat: destLat, alertSwitch: true)
         }
     }
     // Search for Contact
@@ -191,15 +196,11 @@ class ContactsDisplayViewController: UITableViewController {
         }
         var peopleThatMatch: [AddressPerson] = []
         for person in contacts {
-            println("in for loop")
             if checkString(person.name, searchString: searchString) {
                 peopleThatMatch.append(person)
-                println("inside if statement")
-                println(peopleThatMatch)
             }
         }
-        println("Printing people that match")
-        println(peopleThatMatch)
+
         return peopleThatMatch
     }
     
@@ -240,6 +241,8 @@ extension ContactsDisplayViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("didSelectRowAtIndexPath")
+//        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+//        selectedCell.contentView.backgroundColor = UIColor(red: 187/255, green: 255/255, blue: 255/255, alpha: 0.8)
         selectedPerson = contactsToDisplay[indexPath.row]
         println(selectedPerson)
     }

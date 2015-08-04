@@ -12,6 +12,8 @@ import GoogleMaps
 
 class AlertsViewController: UIViewController {
     
+
+    
     var alerts: Results<Alert>! {
         didSet {
             tableView.reloadData()
@@ -60,7 +62,9 @@ class AlertsViewController: UIViewController {
         
         alerts = realm.objects(Alert)
         
+        
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
