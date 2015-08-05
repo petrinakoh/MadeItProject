@@ -33,16 +33,6 @@ class AlertTableViewCell: UITableViewCell {
     }
     
     @IBAction func switchClicked(alertSwitch: UISwitch) {
-        if alertSwitch.on {
-            
-
-        } 
-//        else {
-//            println(alert!.destination)
-//            println("alert is off")
-//            self.switchState = false
-//
-//        }
         let realm = Realm()
         realm.write {
             alert?.updateActive(alertSwitch.on)

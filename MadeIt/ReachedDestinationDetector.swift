@@ -55,11 +55,11 @@ class EnteredGeofenceDetector: RecipeFiredDelegate {
     
         //create two geofences
         
-        let hq  = CustomGeofence(latitude: 37.774841, longitude: -122.400425, radius: 50, customIdentifier: "Headquarters")
-//        let lunchSpot = CustomGeofence(latitude: 37.774841, longitude: -122.400425, radius: 50, customIdentifier: "Grill")
+//        let pnp  = CustomGeofence(latitude: 37.3839997, longitude: -122.0127699, radius: 30, customIdentifier: "Headquarters")
+        let home = CustomGeofence(latitude: 37.380959, longitude: -122.031358, radius: 50, customIdentifier: "Grill")
         
         // Fire when the user reaches destination
-        let trigger: Trigger? = FireTrigger.whenEntersGeofences([hq])
+        let trigger: Trigger? = FireTrigger.whenEntersGeofences([home])
         
         if let geofenceTrigger = trigger {
             // Recipe defines what trigger, what time of day, and how long to wait between consecutive firings
@@ -81,6 +81,7 @@ class EnteredGeofenceDetector: RecipeFiredDelegate {
         // user entered destination
         NSLog("Recipe \(args.recipe.name) fired at \(args.timestamp).");
         for trigger in args.triggersFired {
+            NotificationSender.sendNotification("sending notification")
             TextSender().sendTextMessage()
             for place in trigger.places {
                 NSLog(place.description)

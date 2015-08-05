@@ -28,7 +28,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // create custom geofence
         EnteredGeofenceDetector().geofenceDetectionStart()
         
+        // specify notification actions
+        var dismissNotification = UIMutableUserNotificationAction()
+        dismissNotification.identifier = "DismissNotification"
+        dismissNotification.title = "Dismiss"
+        dismissNotification.activationMode = UIUserNotificationActivationMode.Background
+        dismissNotification.destructive = false
+        dismissNotification.authenticationRequired = false
+        
+        var openMessageScreen = UIMutableUserNotificationAction()
+        openMessageScreen.identifier = "openMessageScreen"
+        openMessageScreen.title = "Send message"
+        openMessageScreen.activationMode = UIUserNotificationActivationMode.Foreground
+        openMessageScreen.destructive = false
+        openMessageScreen.authenticationRequired = false
+        
+        let actionsArray = NSArray(objects: dismissNotification, openMessageScreen)
+        let actionsArrayMinimal = NSArray(objects: dismissNotification, openMessageScreen)
+        
+        var appNotificationCategory = UIMutableUserNotificationCategory()
+        appNotificationCategory.identifier = "appNotificationCategory"
+        appNotificationCategory.setActions(actionsArray as [AnyObject], forContext: UIUserNotificationActionContext.Default)
+        appNotificationCategory.setActions(actionsArrayMinimal as [AnyObject], forContext: UIUserNotificationActionContext.Minimal)
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: NSSet(array: [appNotificationCategory]) as Set<NSObject>))
+        
         return true
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+        switch (identifier!) {
+//            case "DismissNotification":
+//            // dismiss notification
+            
+            case "openMessageScreen":
+            TextSender().sendTextMessage()
+        default:
+            println("Error: unexpected notification action identifier")
+        }
+        completionHandler()
     }
 
     func applicationWillResignActive(application: UIApplication) {
