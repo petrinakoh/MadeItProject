@@ -35,13 +35,17 @@ class NotificationSender {
         
     }
     
-    class func sendNotification(text: String) {
+    class func sendNotification(recipientNumber: String) {
+        println("sentNotification called with")
         var notif = UILocalNotification()
         notif.alertBody = "Remember to text..."
         notif.alertAction = "open"
-        notif.category = "appNotificationCategory"
+//        notif.category = "appNotificationCategory"
+        notif.userInfo = ["recipientNumber" : recipientNumber, "type": "SEND_MESSAGE"]
         
-        UIApplication.sharedApplication().presentLocalNotificationNow(notif)
+        notif.fireDate = NSDate().dateByAddingTimeInterval(8)
+        UIApplication.sharedApplication().scheduleLocalNotification(notif)
+        //UIApplication.sharedApplication().presentLocalNotificationNow(notif)
     }
 
 }

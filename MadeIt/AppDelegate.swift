@@ -28,53 +28,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // create custom geofence
         EnteredGeofenceDetector().geofenceDetectionStart()
         
-        // specify notification actions
-        var dismissNotification = UIMutableUserNotificationAction()
-        dismissNotification.identifier = "DismissNotification"
-        dismissNotification.title = "Dismiss"
-        dismissNotification.activationMode = UIUserNotificationActivationMode.Background
-        dismissNotification.destructive = false
-        dismissNotification.authenticationRequired = false
+//        // specify notification actions
+//        var dismissNotification = UIMutableUserNotificationAction()
+//        dismissNotification.identifier = "DismissNotification"
+//        dismissNotification.title = "Dismiss"
+//        dismissNotification.activationMode = UIUserNotificationActivationMode.Background
+//        dismissNotification.destructive = false
+//        dismissNotification.authenticationRequired = false
+//        
+//        var openMessageScreen = UIMutableUserNotificationAction()
+//        openMessageScreen.identifier = "openMessageScreen"
+//        openMessageScreen.title = "Send message"
+//        openMessageScreen.activationMode = UIUserNotificationActivationMode.Foreground
+//        openMessageScreen.destructive = false
+//        openMessageScreen.authenticationRequired = false
+//        
+//        let actionsArray = NSArray(objects: openMessageScreen)
+//        let actionsArrayMinimal = NSArray(objects: openMessageScreen)
         
-        var openMessageScreen = UIMutableUserNotificationAction()
-        openMessageScreen.identifier = "openMessageScreen"
-        openMessageScreen.title = "Send message"
-        openMessageScreen.activationMode = UIUserNotificationActivationMode.Foreground
-        openMessageScreen.destructive = false
-        openMessageScreen.authenticationRequired = false
+//        var appNotificationCategory = UIMutableUserNotificationCategory()
+//        appNotificationCategory.identifier = "appNotificationCategory"
+//        appNotificationCategory.setActions(actionsArray as [AnyObject], forContext: UIUserNotificationActionContext.Default)
+//        appNotificationCategory.setActions(actionsArrayMinimal as [AnyObject], forContext: UIUserNotificationActionContext.Minimal)
         
-        let actionsArray = NSArray(objects: dismissNotification, openMessageScreen)
-        let actionsArrayMinimal = NSArray(objects: dismissNotification, openMessageScreen)
-        
-        var appNotificationCategory = UIMutableUserNotificationCategory()
-        appNotificationCategory.identifier = "appNotificationCategory"
-        appNotificationCategory.setActions(actionsArray as [AnyObject], forContext: UIUserNotificationActionContext.Default)
-        appNotificationCategory.setActions(actionsArrayMinimal as [AnyObject], forContext: UIUserNotificationActionContext.Minimal)
-        
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: NSSet(array: [appNotificationCategory]) as Set<NSObject>))
+//        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: NSSet(array: [appNotificationCategory]) as Set<NSObject>))
         
         return true
     }
     
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
-        switch (identifier!) {
-//            case "DismissNotification":
-//            // dismiss notification
-            
-            case "openMessageScreen":
-            TextSender().sendTextMessage()
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        println("did receive local notification")
+        let userInfo: [String: AnyObject] = notification.userInfo as! [String: AnyObject]
+        let type = userInfo["type"] as! String
+        switch (type) {
+        case "SEND_MESSAGE":
+            println("woo")
+            println("user info")
+            println(notification.userInfo)
+            NSNotificationCenter.defaultCenter().postNotificationName("SEND_MESSAGE", object: self, userInfo: notification.userInfo)
         default:
-            println("Error: unexpected notification action identifier")
+            println("default notification")
         }
-        completionHandler()
     }
+    
+//    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+//        println("application handle action with identifier")
+//        
+//        let userInfo: [String: AnyObject] = notification.userInfo as! [String: AnyObject]
+//        let type = userInfo["type"] as! String
+//        switch (type) {
+//        case "SEND_MESSAGE":
+//            println("woo")
+//            println("user info")
+//            println(notification.userInfo)
+//            NSNotificationCenter.defaultCenter().postNotificationName("SEND_MESSAGE", object: self, userInfo: notification.userInfo)
+//        default:
+//            println("default notification")
+//        }
+//
+//        completionHandler()
+//    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-        
+        println("resigning app and starting geofence detection")
         EnteredGeofenceDetector().geofenceDetectionStart()
-        println("Application will resign")
+        println("Application will resign now")
 
     }
 

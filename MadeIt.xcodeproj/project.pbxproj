@@ -12,6 +12,7 @@
 		6F0750B81B60146500FCBC61 /* NotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0750B71B60146500FCBC61 /* NotificationSender.swift */; };
 		6F0750BA1B61A83D00FCBC61 /* TextSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0750B91B61A83D00FCBC61 /* TextSender.swift */; };
 		6F0750BC1B66AD5B00FCBC61 /* MapTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0750BB1B66AD5B00FCBC61 /* MapTasks.swift */; };
+		6F0C41AE1B72B61D0014C3DE /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C41AD1B72B61D0014C3DE /* AutoCompleteTextField.swift */; };
 		6F4E43E21B509159007FC913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4E43E11B509159007FC913 /* AppDelegate.swift */; };
 		6F4E43E71B509159007FC913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F4E43E51B509159007FC913 /* Main.storyboard */; };
 		6F4E43E91B509159007FC913 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F4E43E81B509159007FC913 /* Images.xcassets */; };
@@ -24,7 +25,6 @@
 		6F6533EA1B5422E6006C857D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6533E91B5422E6006C857D /* Alert.swift */; };
 		6FDCEC591B573B72000A9AA8 /* ContactsDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDCEC581B573B72000A9AA8 /* ContactsDisplayViewController.swift */; };
 		6FDCEC5B1B5C6C18000A9AA8 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDCEC5A1B5C6C18000A9AA8 /* FriendTableViewCell.swift */; };
-		6FDCEC5D1B5CC07E000A9AA8 /* SenseSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC5C1B5CC07E000A9AA8 /* SenseSdk.framework */; };
 		6FDCEC5F1B5CC0F2000A9AA8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC5E1B5CC0F2000A9AA8 /* CoreLocation.framework */; };
 		6FDCEC611B5CC0FC000A9AA8 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC601B5CC0FC000A9AA8 /* CoreMotion.framework */; };
 		6FDCEC631B5CC108000A9AA8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDCEC621B5CC108000A9AA8 /* SystemConfiguration.framework */; };
@@ -68,6 +68,7 @@
 		6F0750B71B60146500FCBC61 /* NotificationSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSender.swift; sourceTree = "<group>"; };
 		6F0750B91B61A83D00FCBC61 /* TextSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSender.swift; sourceTree = "<group>"; };
 		6F0750BB1B66AD5B00FCBC61 /* MapTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTasks.swift; sourceTree = "<group>"; };
+		6F0C41AD1B72B61D0014C3DE /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		6F4E43DC1B509159007FC913 /* MadeIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadeIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F4E43E01B509159007FC913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F4E43E11B509159007FC913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 				6FDCEC611B5CC0FC000A9AA8 /* CoreMotion.framework in Frameworks */,
 				6FDCEC661B5CC195000A9AA8 /* SenseSdk.framework in Frameworks */,
 				6FDCEC5F1B5CC0F2000A9AA8 /* CoreLocation.framework in Frameworks */,
-				6FDCEC5D1B5CC07E000A9AA8 /* SenseSdk.framework in Frameworks */,
 				F45A8FA31845D65DA6839F54 /* Pods_MadeIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +161,7 @@
 				6F4E44021B50ACCC007FC913 /* View Controllers */,
 				6F4E44011B50ACBE007FC913 /* Entities */,
 				6F4E43E11B509159007FC913 /* AppDelegate.swift */,
+				6F0C41AD1B72B61D0014C3DE /* AutoCompleteTextField.swift */,
 				6F0750B51B600B5D00FCBC61 /* ReachedDestinationDetector.swift */,
 				6F4E43E51B509159007FC913 /* Main.storyboard */,
 				6F4E43E81B509159007FC913 /* Images.xcassets */,
@@ -290,7 +291,7 @@
 		6F4E43D41B509159007FC913 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Petrina Koh";
 				TargetAttributes = {
 					6F4E43DB1B509159007FC913 = {
@@ -468,6 +469,7 @@
 				6F0750BA1B61A83D00FCBC61 /* TextSender.swift in Sources */,
 				6F4E44051B50AD3E007FC913 /* AlertsViewController.swift in Sources */,
 				6F0750B81B60146500FCBC61 /* NotificationSender.swift in Sources */,
+				6F0C41AE1B72B61D0014C3DE /* AutoCompleteTextField.swift in Sources */,
 				6F6533E41B542012006C857D /* NewAlertViewController.swift in Sources */,
 				6F6533E81B542221006C857D /* AlertTableViewCell.swift in Sources */,
 				6F0750B61B600B5D00FCBC61 /* ReachedDestinationDetector.swift in Sources */,

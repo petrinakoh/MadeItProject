@@ -9,10 +9,9 @@
 import UIKit
 import RealmSwift
 import GoogleMaps
+import MessageUI
 
-class AlertsViewController: UIViewController {
-    
-
+class AlertsViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
     var alerts: Results<Alert>! {
         didSet {
@@ -47,7 +46,7 @@ class AlertsViewController: UIViewController {
                 println("No one loves \(identifier)")
             }
             
-            alerts = realm.objects(Alert)
+            alerts = realm.objects(Alert).sorted("destination", ascending: true)
             
         }
     }
@@ -60,7 +59,13 @@ class AlertsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        alerts = realm.objects(Alert)
+        alerts = realm.objects(Alert).sorted("destination", ascending: true)
+        
+        // MARK: Testing notifications delete later
+        NotificationSender.sendNotification("217-898-7054")
+        
+        // setup observer
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "sendMessageFromNotification:", name: "SEND_MESSAGE", object: nil)
         
         
     }
@@ -72,15 +77,57 @@ class AlertsViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Text Messaging
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false
     }
-    */
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+        switch (result.value) {
+        case MessageComposeResultCancelled.value:
+            println("Message was cancelled")
+            //UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultFailed.value:
+            println("Message failed")
+            //UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultSent.value:
+            println("Message was sent")
+            //UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+        default:
+            break;
+        }
+    }
+    
+    func sendMessageFromNotification(notification: NSNotification) {
+        println("func sendMessageFromNotification called")
+        println("notification")
+        println(notification)
+        if (MFMessageComposeViewController.canSendText()) {
+            println("inside if statement")
+            var messageVC = MFMessageComposeViewController()
+            
+            messageVC.body = "Made it!"
+            let userInfo = notification.userInfo as! [String: AnyObject]
+            messageVC.recipients = [userInfo["recipientNumber"]!]
+            messageVC.messageComposeDelegate = self
+            
+            println("did func send message from notification get to this line")
+            
+//            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(messageVC, animated: false, completion: nil)
+            
+            self.presentViewController(messageVC, animated: false, completion: nil)
+            println("after present view controller")
+            
+        }
+        
+    }
 
 }
 
@@ -118,7 +165,7 @@ extension AlertsViewController: UITableViewDelegate {
                 realm.delete(alert)
             }
             
-            alerts = realm.objects(Alert)
+            alerts = realm.objects(Alert).sorted("destination", ascending: true)
         }
     }
 }

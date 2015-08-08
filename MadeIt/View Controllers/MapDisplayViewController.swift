@@ -12,14 +12,14 @@ import GoogleMaps
 import RealmSwift
 import CoreLocation
 
-class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
+class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate, NSURLConnectionDataDelegate {
     
     let realm = Realm()
     
     @IBOutlet weak var mapView: GMSMapView!
     var currentAlert: Alert?
 
-    @IBOutlet weak var showUp: UITextField!
+    @IBOutlet weak var autocompleteTextfield: UITextField!
     
     var locationManager = CLLocationManager()
     var didFindMyLocation = false
@@ -93,13 +93,15 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
     override func viewDidLoad() {
         super.viewDidLoad()
         println("map view did load")
-        
+
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
         // Location manager
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
+        
     }
+    
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedAlways {
@@ -121,6 +123,8 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
                 return true
             } else {
                 println("there is no destination")
+                let noDestinationMessage = UIAlertView(title: "Oops!", message: "No destination. Please enter an address.", delegate: self, cancelButtonTitle: "OK")
+                noDestinationMessage.show()
                 return false
             }
         } else {

@@ -29,8 +29,8 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
         
         
         // create two geofences
-//        let pnp = CustomGeofence(latitude: 37.3839997, longitude: -122.0127699, radius: 30, customIdentifier: "Headquarters")
-        let home = CustomGeofence(latitude: 37.380959, longitude: -122.031358, radius: 50, customIdentifier: "Grill")
+//        let pnp = CustomGeofence(latitude: 37.3839997, longitude: -122.0127699, radius: 30, customIdentifier: "pnp")
+        let home = CustomGeofence(latitude: 37.380959, longitude: -122.031358, radius: 50, customIdentifier: "home")
         
         let errorPointer = SenseSdkErrorPointer.create()
         if errorPointer.error != nil {
@@ -60,18 +60,34 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
 
     }
     
-    func sendTextMessage() {
+//    func sendMessageFromNotification() {
+//        println("button tapped")
+//        if (MFMessageComposeViewController.canSendText()) {
+//            println("inside if statement")
+//            var messageVC = MFMessageComposeViewController()
+//            
+//            messageVC.body = "Made it!"
+//            messageVC.recipients = ["217-898-7054"]
+//            messageVC.messageComposeDelegate = self
+//            
+//            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(messageVC, animated: false, completion: nil)
+//            
+//        }
+//
+//    }
+    
+    func sendTextMessage(number: String) {
         println("func sendTextMessage called")
         if (MFMessageComposeViewController.canSendText()) {
             println("inside if statement")
             var messageVC = MFMessageComposeViewController()
             
             messageVC.body = "Made it!"
-            messageVC.recipients = ["217-898-7054"]
+            messageVC.recipients = [number]
             messageVC.messageComposeDelegate = self
 
-//            self.presentViewController(messageVC, animated: false, completion: nil)
-            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(messageVC, animated: false, completion: nil)
+            self.presentViewController(messageVC, animated: false, completion: nil)
+//            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(messageVC, animated: false, completion: nil)
         }
         
     }
@@ -99,6 +115,7 @@ class TextSender: UIViewController, MFMessageComposeViewControllerDelegate {
     }
     
     override func viewWillDisappear(animated: Bool) {
+        println("text sender view will disappear")
         self.navigationController?.navigationBarHidden = false
     }
 }
