@@ -61,9 +61,6 @@ class AlertsViewController: UIViewController, MFMessageComposeViewControllerDele
         
         alerts = realm.objects(Alert).sorted("destination", ascending: true)
         
-        // MARK: Testing notifications delete later
-        NotificationSender.sendNotification("217-898-7054")
-        
         // setup observer
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "sendMessageFromNotification:", name: "SEND_MESSAGE", object: nil)
         
