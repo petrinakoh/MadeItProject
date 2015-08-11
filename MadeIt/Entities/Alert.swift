@@ -17,7 +17,6 @@ class Alert : Object {
     dynamic var destLong: Double = 0
     dynamic var destLat: Double = 0
     dynamic var active: Bool = true
-    dynamic var added: Bool = false
 
     
     convenience init(destination: String, name: String, phone: String, destLong: Double, destLat: Double, alertSwitch: Bool) {
@@ -32,10 +31,6 @@ class Alert : Object {
     
     func updateActive(status: Bool) {
         self.active = status
-    }
-    
-    func updateAdded(added: Bool) {
-        self.added = added
     }
     
 }

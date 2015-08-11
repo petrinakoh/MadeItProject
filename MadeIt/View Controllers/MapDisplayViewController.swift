@@ -9,20 +9,17 @@
 import Foundation
 import UIKit
 import GoogleMaps
-import GooglePlacesAutocomplete
 import RealmSwift
 import CoreLocation
 
 class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate, NSURLConnectionDataDelegate {
-    
-    let googleMapsApiKey = "AIzaSyAUb1UcBLUJKAaiZCqOYugrVtHrrDWclAk"
     
     let realm = Realm()
     
     @IBOutlet weak var mapView: GMSMapView!
     var currentAlert: Alert?
 
-    @IBOutlet weak var autocompleteTextfield: AutoCompleteTextField!
+    @IBOutlet weak var autocompleteTextfield: UITextField!
     
     var locationManager = CLLocationManager()
     var didFindMyLocation = false
@@ -34,40 +31,34 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
     var searchedDestination: String!
     var savedDestination: String!
     
-    var placesClient: GMSPlacesClient?
-    
     var destLat: Double!
     var destLong: Double!
     
-    func placeAutocomplete(text: String) {
-        println("placeAutoComplete called, text is \(text)");
-        let filter = GMSAutocompleteFilter()
-        filter.type = GMSPlacesAutocompleteTypeFilter.NoFilter
-        
-        let visibleRegion = self.mapView.projection.visibleRegion()
-        let bounds = GMSCoordinateBounds(coordinate: visibleRegion.farLeft, coordinate: visibleRegion.farRight)
-        
-        placesClient?.autocompleteQuery(text, bounds: bounds, filter: filter, callback: { (results, error: NSError?) -> Void in
-            if let error = error {
-                println("Autocomplete error \(error)")
-                // show some alertbox with some message to tell user something went wrong
-                return
-            }
-            
-            var suggestions = [] as [String]
-            for result in results! {
-                if let result = result as? GMSAutocompletePrediction {
-                    println("\(result.attributedFullText)")
-                    suggestions.append(result.attributedFullText.string)
-                }
-            }
-            self.autocompleteTextfield.autoCompleteStrings = suggestions
-        })
-    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        placeAutocomplete(textField.text)
+        searchedDestination = textField.text
+        //savedDestination = textField.text
+        self.mapTasks.geocodeAddress(searchedDestination, withCompletionHandler: { (status, success) -> Void in
+            if !success {
+                println(status)
+                
+                if status == "ZERO_RESULTS" {
+                    println("No location found")
+                    let errorMessage = UIAlertView(title: "Sorry", message: "Unable to find address. Please try again", delegate: self, cancelButtonTitle: "OK")
+                    errorMessage.show()
+                }
+            } else {
+                let coordinate = CLLocationCoordinate2D(latitude: self.mapTasks.fetchedAddressLatitude, longitude: self.mapTasks.fetchedAddressLongitude)
+                self.mapView.camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 14.0)
+                self.setupLocationMarker(coordinate)
+                self.savedDestination = self.mapTasks.fetchedFormattedAddress
+                self.destLat = self.mapTasks.fetchedAddressLatitude
+                self.destLong = self.mapTasks.fetchedAddressLongitude
+                println("after geocoding")
+                println(self.savedDestination)
+            }
+        })
         textField.resignFirstResponder()
+        println(searchedDestination)
         return false
     }
     
@@ -109,42 +100,8 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         
-        placesClient = GMSPlacesClient()
-        
-        
-        autocompleteTextfield.onTextChange = {
-            (String) in
-            self.searchedDestination = String   // for checking purposes
-            self.placeAutocomplete(String)
-        }
-        
-        autocompleteTextfield.onSelect = {
-            (String, NSIndexPath) in
-            self.searchedDestination = String   // for checking purposes
-            self.autocompleteTextfield.text = String    // to upade the textfield to the selected text
-            
-            self.mapTasks.geocodeAddress(String, withCompletionHandler: { (status, success) -> Void in
-                if !success {
-                    println(status)
-                    
-                    if status == "ZERO_RESULTS" {
-                        println("No location found")
-                        let errorMessage = UIAlertView(title: "Sorry", message: "Unable to find address. Please try again", delegate: self, cancelButtonTitle: "OK")
-                        errorMessage.show()
-                    }
-                } else {
-                    let coordinate = CLLocationCoordinate2D(latitude: self.mapTasks.fetchedAddressLatitude, longitude: self.mapTasks.fetchedAddressLongitude)
-                    self.mapView.camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 14.0)
-                    self.setupLocationMarker(coordinate)
-                    self.savedDestination = self.mapTasks.fetchedFormattedAddress
-                    self.destLat = self.mapTasks.fetchedAddressLatitude
-                    self.destLong = self.mapTasks.fetchedAddressLongitude
-                    println("after geocoding")
-                    println(self.savedDestination)
-                }
-            })
-        }
     }
+    
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedAlways {
@@ -161,12 +118,12 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
         println("shouldPerformSegueWithIdentifier")
         
         if(identifier == "Next") {
-            if let d = savedDestination {
+            if let d = searchedDestination {
                 println("there is a destination")
                 return true
             } else {
                 println("there is no destination")
-                let noDestinationMessage = UIAlertView(title: "Oops!", message: "Destination could not be found. Please enter an address.", delegate: self, cancelButtonTitle: "OK")
+                let noDestinationMessage = UIAlertView(title: "Oops!", message: "No destination. Please enter an address.", delegate: self, cancelButtonTitle: "OK")
                 noDestinationMessage.show()
                 return false
             }

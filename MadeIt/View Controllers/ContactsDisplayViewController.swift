@@ -206,6 +206,7 @@ class ContactsDisplayViewController: UITableViewController {
     
     func checkString(str: String, searchString: String) -> Bool {
         if str.lowercaseString.rangeOfString(searchString.lowercaseString) != nil {
+            println("exists")
             return true
         } else {
             return false
@@ -231,6 +232,8 @@ extension ContactsDisplayViewController: UITableViewDataSource {
         let row = indexPath.row
         let person = contactsToDisplay[row]
 //        cell.textLabel?.text = people[indexPath.row]
+        println("at override func tableview")
+        println(person.firstName)
         cell.textLabel?.text = "\(person.firstName) \(person.lastName)"
         
         return cell
@@ -241,7 +244,6 @@ extension ContactsDisplayViewController: UITableViewDataSource {
 //        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
 //        selectedCell.contentView.backgroundColor = UIColor(red: 187/255, green: 255/255, blue: 255/255, alpha: 0.8)
         selectedPerson = contactsToDisplay[indexPath.row]
-        searchContacts.resignFirstResponder()
         println(selectedPerson)
     }
 }

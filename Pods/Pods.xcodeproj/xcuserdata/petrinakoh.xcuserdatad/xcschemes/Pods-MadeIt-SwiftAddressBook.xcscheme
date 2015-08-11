@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "67BD9D09F54E3DF2EF9FDD23"
+               BlueprintIdentifier = "3CAF2CAE7C04146C88EFEA66"
                BuildableName = "SwiftAddressBook.framework"
                BlueprintName = "Pods-MadeIt-SwiftAddressBook"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,6 +39,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3CAF2CAE7C04146C88EFEA66"
+            BuildableName = "SwiftAddressBook.framework"
+            BlueprintName = "Pods-MadeIt-SwiftAddressBook"
+            ReferencedContainer = "container:Pods.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

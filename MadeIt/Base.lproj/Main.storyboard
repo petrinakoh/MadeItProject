@@ -126,13 +126,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter destination" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-jX-Vbr" customClass="AutoCompleteTextField" customModule="MadeIt" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter destination" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-jX-Vbr">
                                 <rect key="frame" x="0.0" y="64" width="600" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="NTb-Ii-hQ4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="QqX-Qy-hha" id="FOL-1F-tCb"/>
                                 </connections>
@@ -145,23 +145,6 @@
                                     <outlet property="delegate" destination="QqX-Qy-hha" id="Rkt-0H-Xmw"/>
                                 </connections>
                             </view>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ItM-za-PRV">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="3So-tp-Lb8"/>
-                                </constraints>
-                                <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Enter Destination" id="cqe-aW-tQs" userLabel="Enter Destination">
-                                        <barButtonItem key="rightBarButtonItem" title="Next" id="UNX-Wg-A0W">
-                                            <color key="tintColor" red="0.0" green="0.10045622308506008" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <segue destination="L94-2a-A5H" kind="show" identifier="Next" id="MXa-v3-PpP"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -174,24 +157,17 @@
                             <constraint firstItem="Rz1-jX-Vbr" firstAttribute="top" secondItem="CWy-KJ-7sh" secondAttribute="bottom" id="EBY-in-Txo"/>
                             <constraint firstItem="zhU-pT-Ycc" firstAttribute="top" secondItem="Rz1-jX-Vbr" secondAttribute="bottom" id="HMx-bU-Taq"/>
                             <constraint firstItem="zhU-pT-Ycc" firstAttribute="centerX" secondItem="Rz1-jX-Vbr" secondAttribute="centerX" id="K2V-lz-u0f"/>
-                            <constraint firstItem="ItM-za-PRV" firstAttribute="top" secondItem="CWy-KJ-7sh" secondAttribute="bottom" constant="-44" id="KHF-pc-jrq"/>
                             <constraint firstItem="Rz1-jX-Vbr" firstAttribute="top" secondItem="CWy-KJ-7sh" secondAttribute="bottom" id="SMF-zF-8cg"/>
                             <constraint firstItem="zhU-pT-Ycc" firstAttribute="leading" secondItem="OMw-Yk-9WV" secondAttribute="leadingMargin" id="TYx-QI-4mZ"/>
                             <constraint firstItem="zhU-pT-Ycc" firstAttribute="leading" secondItem="OMw-Yk-9WV" secondAttribute="leadingMargin" id="U1E-xc-32B"/>
-                            <constraint firstItem="ItM-za-PRV" firstAttribute="top" secondItem="OMw-Yk-9WV" secondAttribute="topMargin" id="Ud3-gr-YPZ"/>
                             <constraint firstItem="zhU-pT-Ycc" firstAttribute="trailing" secondItem="OMw-Yk-9WV" secondAttribute="trailingMargin" id="Vi1-eF-Jsa"/>
-                            <constraint firstItem="ItM-za-PRV" firstAttribute="leading" secondItem="OMw-Yk-9WV" secondAttribute="leading" id="X4M-0u-BwJ"/>
                             <constraint firstAttribute="trailing" secondItem="Rz1-jX-Vbr" secondAttribute="trailing" id="e2c-G4-um1"/>
                             <constraint firstItem="S5t-AN-BVJ" firstAttribute="top" secondItem="zhU-pT-Ycc" secondAttribute="bottom" constant="15" id="kgM-n6-m7B"/>
-                            <constraint firstItem="ItM-za-PRV" firstAttribute="top" secondItem="CWy-KJ-7sh" secondAttribute="bottom" id="mt1-k6-odw"/>
                             <constraint firstItem="zhU-pT-Ycc" firstAttribute="trailing" secondItem="OMw-Yk-9WV" secondAttribute="trailingMargin" constant="16" id="nFJ-u3-wu4"/>
                             <constraint firstItem="S5t-AN-BVJ" firstAttribute="top" secondItem="zhU-pT-Ycc" secondAttribute="bottom" id="xiN-EZ-iW3"/>
-                            <constraint firstAttribute="trailing" secondItem="ItM-za-PRV" secondAttribute="trailing" id="zPu-9v-e0l"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Ud3-gr-YPZ"/>
-                                <exclude reference="mt1-k6-odw"/>
                                 <exclude reference="3tD-ON-lqC"/>
                                 <exclude reference="EBY-in-Txo"/>
                                 <exclude reference="65r-zU-B40"/>
@@ -206,6 +182,13 @@
                         </variation>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Enter Destination" id="cqe-aW-tQs" userLabel="Enter Destination">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="UNX-Wg-A0W">
+                            <connections>
+                                <segue destination="L94-2a-A5H" kind="show" identifier="Next" id="MXa-v3-PpP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="autocompleteTextfield" destination="Rz1-jX-Vbr" id="sFb-AB-iQl"/>

@@ -1,6 +1,5 @@
 PODS:
   - GoogleMaps (1.10.1)
-  - GooglePlacesAutocomplete (0.3.0)
   - Realm (0.93.2):
     - Realm/Headers (= 0.93.2)
   - Realm/Headers (0.93.2)
@@ -10,13 +9,11 @@ PODS:
 
 DEPENDENCIES:
   - GoogleMaps
-  - GooglePlacesAutocomplete
   - RealmSwift
   - SwiftAddressBook
 
 SPEC CHECKSUMS:
   GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
-  GooglePlacesAutocomplete: 7694636fce561c9d8ac807b8e490d299a730a633
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
   RealmSwift: 231b064da9f98b1c4f325fe1f1cb8756aae2b8d6
   SwiftAddressBook: 295fe9099a2e420e214a8beec36050030ece0436

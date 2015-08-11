@@ -16,61 +16,102 @@ class EnteredGeofenceDetector: RecipeFiredDelegate {
     
     var alerts: Results<Alert>! 
     
+    var savedDestination: String!
+    
     var destinationAddress: CustomGeofence!
     
     var customArray: [CustomGeofence] = []
     
     func geofenceDetectionStart() {
         println("geofence detection func")
+        println(savedDestination)
         
         let errorPointer = SenseSdkErrorPointer.create()
         
+        // For actual alert destinations
         let realm = Realm()
         alerts = realm.objects(Alert)
         for alert in alerts {
             if alert.active {
-                if !alert.added {
-                    println("alert phone number is \(alert.phone!)")
-                    let dateNow = NSDate().timeIntervalSince1970
-                    let cg = CustomGeofence(latitude: alert.destLat, longitude: alert.destLong, radius: 100, customIdentifier: "\(alert.phone!)-\(dateNow)")
-                    let trigger: Trigger? = FireTrigger.whenEntersGeofences([cg])
-                    if let geofenceTrigger = trigger {
-                        println("create recipe")
-                        let cd = Cooldown.create(oncePer: 5, frequency: CooldownTimeUnit.Minutes)
-                        let geofenceRecipe = Recipe(name: "ArrivedAtGeofence-\(alert.phone!)-\(dateNow)", trigger: geofenceTrigger, timeWindow: TimeWindow.allDay, cooldown: cd!)
-                        SenseSdk.register(recipe: geofenceRecipe, delegate: self)
-                        realm.write{
-                            alert.updateActive(true)
-                        }
-                        
-                    }
-                }
-            } else {
-                if alert.added {
-                    SenseSdk.unregister(name: alert.phone!)
-                    realm.write{
-                        alert.updateActive(false)
-                    }
+                if let phone = alert.phone {
+                    let cg = CustomGeofence(latitude: alert.destLat, longitude: alert.destLong, radius: 30, customIdentifier: phone)
+                    customArray.append(cg)
+                    i = i + 1
+                    println(i)
+                    println("OAUCJS CUSTOM ARRAY HERE")
+                    println("&&&&&&&&&&&& custom array phone number \(customArray[i-1].customIdentifier)")
                 }
                 
+                
+//                let destinationAddress = CustomGeofence(latitude: alert.destLat, longitude: alert.destLong, radius: 30, customIdentifier: "destinationAddress")
+//                println("address is \(alert.destination)")
+//                println("destLat is \(alert.destLat)")
+//                println("destLong is \(alert.destLong)")
+                
+                
+                let trigger: Trigger? = FireTrigger.whenEntersGeofences(customArray)
+                
+                if let geofenceTrigger = trigger {
+                    let geofenceRecipe = Recipe(name: "ArrivedAtGeofence", trigger: geofenceTrigger, timeWindow: TimeWindow.allDay)
+                    
+                    SenseSdk.register(recipe: geofenceRecipe, delegate: self)
+                }
+                
+                if errorPointer.error != nil {
+                    NSLog("Error!: \(errorPointer.error.message)")
+                }
             }
         }
+
+
+           
         
-        if errorPointer.error != nil {
-            NSLog("Error!: \(errorPointer.error.message)")
-        }
+    
+    
+//        //create two geofences
+//        
+////        let pnp  = CustomGeofence(latitude: 37.3839997, longitude: -122.0127699, radius: 30, customIdentifier: "pnp")
+//        let home = CustomGeofence(latitude: 37.380959, longitude: -122.031358, radius: 50, customIdentifier: "home")
+//        
+//        // Fire when the user reaches destination
+//        let trigger: Trigger? = FireTrigger.whenEntersGeofences([home])
+//        
+//        if let geofenceTrigger = trigger {
+//            // Recipe defines what trigger, what time of day, and how long to wait between consecutive firings
+//            let geofenceRecipe = Recipe(name: "ArrivedAtGeofence", trigger: geofenceTrigger, timeWindow: TimeWindow.allDay)
+//            
+//            // Register the unique recipe
+//            SenseSdk.register(recipe: geofenceRecipe, delegate: self)
+//        }
+//        
+//        if errorPointer.error != nil {
+//            NSLog("Error!: \(errorPointer.error.message)")
+//        }
+        
+        
     }
+    
+    
+
+
+                    
+    
+    
 
 
     @objc func recipeFired(args: RecipeFiredArgs) {
         // user entered destination
-        println("Recipe \(args.recipe.name) fired at \(args.timestamp).");
+        NSLog("Recipe \(args.recipe.name) fired at \(args.timestamp).");
         for trigger in args.triggersFired {
             
             for place in trigger.places {
-                println("place \(place.description)")
+                println("place description is here omfg what happedn")
+                println(place.description)
                 NotificationSender.sendNotification(place.description)
+                //TextSender().sendTextMessage(place.description)
+                NSLog(place.description)
                 let transitionDesc = args.recipe.trigger.transitionType.description
+//                NotificationSender.send("\(transitionDesc) \(place.description)")
             }
         }
     }
