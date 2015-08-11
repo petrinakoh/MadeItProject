@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        //testing
         GMSServices.provideAPIKey(googleMapsApiKey)
         SenseSdk.enableSdkWithKey("5ce89061-4891-409a-8549-9c8a5cd6d57f")
         
