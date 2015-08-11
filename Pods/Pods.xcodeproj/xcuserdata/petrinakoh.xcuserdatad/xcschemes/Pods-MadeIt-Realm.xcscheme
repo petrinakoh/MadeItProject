@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A0B09250C0CADACE6877AB3A"
+               BlueprintIdentifier = "48B929F990E575F86F192DE9"
                BuildableName = "Realm.framework"
                BlueprintName = "Pods-MadeIt-Realm"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A0B09250C0CADACE6877AB3A"
-            BuildableName = "Realm.framework"
-            BlueprintName = "Pods-MadeIt-Realm"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

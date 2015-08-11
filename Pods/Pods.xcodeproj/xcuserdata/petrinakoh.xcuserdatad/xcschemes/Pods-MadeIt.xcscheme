@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D44C5F89C4646410CFC08FAA"
+               BlueprintIdentifier = "EF8E8B31072F412060152996"
                BuildableName = "Pods_MadeIt.framework"
                BlueprintName = "Pods-MadeIt"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D44C5F89C4646410CFC08FAA"
-            BuildableName = "Pods_MadeIt.framework"
-            BlueprintName = "Pods-MadeIt"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
