@@ -28,11 +28,11 @@ class EnteredGeofenceDetector: RecipeFiredDelegate {
         let realm = Realm()
         alerts = realm.objects(Alert)
         for alert in alerts {
+            let dateNow = NSDate().timeIntervalSince1970
             if alert.active {
                 if !alert.added {
                     println("alert phone number is \(alert.phone)")
-                    let dateNow = NSDate().timeIntervalSince1970
-                    let cg = CustomGeofence(latitude: alert.destLat, longitude: alert.destLong, radius: 100, customIdentifier: "\(alert.phone)-\(dateNow)")
+                    let cg = CustomGeofence(latitude: alert.destLat, longitude: alert.destLong, radius: 100, customIdentifier: alert.phone)
                     let trigger: Trigger? = FireTrigger.whenEntersGeofences([cg])
                     if let geofenceTrigger = trigger {
                         println("create recipe")
@@ -47,7 +47,7 @@ class EnteredGeofenceDetector: RecipeFiredDelegate {
                 }
             } else {
                 if alert.added {
-                    SenseSdk.unregister(name: alert.phone)
+                    SenseSdk.unregister(name: "ArrivedAtGeofence-\(alert.phone)-\(dateNow)")
                     realm.write{
                         alert.updateActive(false)
                     }

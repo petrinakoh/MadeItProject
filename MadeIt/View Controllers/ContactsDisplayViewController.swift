@@ -131,20 +131,44 @@ class ContactsDisplayViewController: UITableViewController {
         return contactsToReturn
     }
 
+//    
+//    - (void)viewDidLoad
+//    {
+//    [super viewDidLoad];
+//    
+//    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0., 0., 320., 44.)];
+//    self.tableView.tableHeaderView = searchBar;
+//    }
+//    
+//    - (void)viewWillAppear:(BOOL)animated
+//    {
+//    [super viewWillAppear:animated];
+//    
+//    CGPoint contentOffset = self.tableView.contentOffset;
+//    contentOffset.y += CGRectGetHeight(self.tableView.tableHeaderView.frame);
+//    self.tableView.contentOffset = contentOffset;
+//    }
+
 
     override func viewDidLoad() {
         println("viewdidload ContactsDisplayViewController")
-        searchContacts.delegate = self
         super.viewDidLoad()
         println(destination)
-        
+
+        searchContacts.delegate = self
+
         // Do any additional setup after loading the view.
     }
     
+    
+    //
+    //    CGPoint contentOffset = self.tableView.contentOffset;
+    //    contentOffset.y += CGRectGetHeight(self.tableView.tableHeaderView.frame);
+    //    self.tableView.contentOffset = contentOffset;
     override func viewDidAppear(animated: Bool) {
         println("ContactsDisplayVC view did appear called")
         super.viewDidAppear(true)
-        
+
         let permission = checkPermissions()
 //        println("check if permission is..")
 //        println(permission)
@@ -265,4 +289,5 @@ extension ContactsDisplayViewController: UISearchBarDelegate {
         
         saveToDisplay(searchContacts(contactStorage, searchString: searchText))
     }
+
 }

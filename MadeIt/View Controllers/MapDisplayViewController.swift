@@ -143,6 +143,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
                     self.destLong = self.mapTasks.fetchedAddressLongitude
                     println("after geocoding")
                     println(self.savedDestination)
+                    self.autocompleteTextfield.resignFirstResponder()
                 }
             })
         }
