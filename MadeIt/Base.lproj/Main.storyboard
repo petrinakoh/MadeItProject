@@ -126,13 +126,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter destination" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-jX-Vbr">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter destination" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-jX-Vbr" customClass="AutoCompleteTextField" customModule="MadeIt" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="NTb-Ii-hQ4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
                                 <connections>
                                     <outlet property="delegate" destination="QqX-Qy-hha" id="FOL-1F-tCb"/>
                                 </connections>
@@ -141,9 +141,6 @@
                                 <rect key="frame" x="0.0" y="104" width="600" height="452"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                <connections>
-                                    <outlet property="delegate" destination="QqX-Qy-hha" id="Rkt-0H-Xmw"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

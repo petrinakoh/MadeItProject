@@ -114,6 +114,8 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
         
         autocompleteTextfield.onTextChange = {
             (String) in
+            
+            println("autocompleteTextField.onTextChange")
             self.searchedDestination = String   // for checking purposes
             self.placeAutocomplete(String)
         }
