@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import GoogleMaps
 import MessageUI
+import SenseSdk
 
 class AlertsViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
@@ -156,13 +157,19 @@ extension AlertsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let alert = alerts[indexPath.row] as Object
+//            let alert = alerts[indexPath.row] as Object
+            let alert = alerts[indexPath.row] as Alert
+            SenseSdk.unregister(name: "ArrivedAtGeofence-\(alert.phone)-\(alert.identifier)")
+
             let realm = Realm()
             realm.write() {
                 realm.delete(alert)
             }
             
             alerts = realm.objects(Alert).sorted("destination", ascending: true)
+            
+            // unregister sense sdk trigger recipe
+            
         }
     }
 }

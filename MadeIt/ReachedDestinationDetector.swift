@@ -37,7 +37,7 @@ class EnteredGeofenceDetector: RecipeFiredDelegate {
                     if let geofenceTrigger = trigger {
                         println("create recipe")
                         let cd = Cooldown.create(oncePer: 5, frequency: CooldownTimeUnit.Minutes)
-                        let geofenceRecipe = Recipe(name: "ArrivedAtGeofence-\(alert.phone)-\(dateNow)", trigger: geofenceTrigger, timeWindow: TimeWindow.allDay, cooldown: cd!)
+                        let geofenceRecipe = Recipe(name: "ArrivedAtGeofence-\(alert.phone)-\(alert.identifier)", trigger: geofenceTrigger, timeWindow: TimeWindow.allDay, cooldown: cd!)
                         SenseSdk.register(recipe: geofenceRecipe, delegate: self)
                         realm.write{
                             alert.updateActive(true)
@@ -47,7 +47,7 @@ class EnteredGeofenceDetector: RecipeFiredDelegate {
                 }
             } else {
                 if alert.added {
-                    SenseSdk.unregister(name: "ArrivedAtGeofence-\(alert.phone)-\(dateNow)")
+                    SenseSdk.unregister(name: "ArrivedAtGeofence-\(alert.phone)-\(alert.identifier)")
                     realm.write{
                         alert.updateActive(false)
                     }

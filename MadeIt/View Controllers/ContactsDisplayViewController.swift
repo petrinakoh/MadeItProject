@@ -208,7 +208,8 @@ class ContactsDisplayViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "Save") {
             // this goes back to the main dashboard
-            currentAlert = Alert(destination: destination, name: selectedPerson!.name, phone: selectedPerson!.phone, destLong: destLong, destLat: destLat, alertSwitch: true)
+            let dateNow = NSDate().timeIntervalSince1970
+            currentAlert = Alert(destination: destination, name: selectedPerson!.name, phone: selectedPerson!.phone, destLong: destLong, destLat: destLat, alertSwitch: true, identifier: "\(dateNow)")
         }
     }
     // Search for Contact

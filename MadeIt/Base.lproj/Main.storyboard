@@ -67,6 +67,7 @@
                                                 <constraint firstItem="8k7-bR-ALZ" firstAttribute="leading" secondItem="pce-hx-bae" secondAttribute="leadingMargin" constant="8" id="2aJ-R0-qy6"/>
                                                 <constraint firstItem="1w4-27-Xbo" firstAttribute="top" secondItem="8k7-bR-ALZ" secondAttribute="bottom" constant="12" id="46e-8y-hhK"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="aEn-yw-3YD" secondAttribute="trailing" constant="8" id="Hzy-zl-mPD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="aEn-yw-3YD" secondAttribute="trailing" constant="8" id="JoN-vG-ZR0"/>
                                                 <constraint firstItem="1w4-27-Xbo" firstAttribute="leading" secondItem="pce-hx-bae" secondAttribute="leadingMargin" constant="8" id="UfB-BN-xvp"/>
                                                 <constraint firstItem="aEn-yw-3YD" firstAttribute="leading" secondItem="1w4-27-Xbo" secondAttribute="trailing" constant="20" id="Zqv-LD-F9h"/>
                                                 <constraint firstItem="8k7-bR-ALZ" firstAttribute="width" secondItem="1w4-27-Xbo" secondAttribute="width" id="fJI-4E-PcO"/>
@@ -75,6 +76,11 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="1w4-27-Xbo" secondAttribute="bottom" constant="11" id="mLa-Jl-Uq8"/>
                                                 <constraint firstItem="aEn-yw-3YD" firstAttribute="top" secondItem="pce-hx-bae" secondAttribute="topMargin" constant="41" id="o2V-UF-2eV"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Hzy-zl-mPD"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="alertSwitch" destination="aEn-yw-3YD" id="DC5-IP-vFB"/>
@@ -241,6 +247,7 @@
         <!--Text Sender-->
         <scene sceneID="6B0-Sb-AXZ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S7w-jD-pEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="RmZ-6C-8l1" customClass="TextSender" customModule="MadeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j2v-ge-VsD"/>
@@ -273,13 +280,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="OqI-zZ-3qX"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S7w-jD-pEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2928" y="1006"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KIu-6H-ehh">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="htD-3d-TqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GnH-wd-iWu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q2G-Ih-wKk">
@@ -291,7 +298,6 @@
                         <segue destination="RmZ-6C-8l1" kind="relationship" relationship="rootViewController" id="EQ5-eu-dDU"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="htD-3d-TqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2116" y="1006"/>
         </scene>
