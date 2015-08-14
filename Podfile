@@ -6,6 +6,7 @@ target 'MadeIt' do
   pod 'GoogleMaps'
   pod 'GooglePlacesAutocomplete'
   pod 'SwiftAddressBook'
+  pod 'Mixpanel'
 end
 
 target 'MadeItTests' do
@@ -13,4 +14,5 @@ target 'MadeItTests' do
   pod 'GoogleMaps'
   pod 'GooglePlacesAutocomplete'
   pod 'SwiftAddressBook'
+  pod 'Mixpanel'
 end

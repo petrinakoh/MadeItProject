@@ -1,6 +1,9 @@
 PODS:
   - GoogleMaps (1.10.1)
   - GooglePlacesAutocomplete (0.3.0)
+  - Mixpanel (2.8.2):
+    - Mixpanel/Mixpanel (= 2.8.2)
+  - Mixpanel/Mixpanel (2.8.2)
   - Realm (0.94.1):
     - Realm/Headers (= 0.94.1)
   - Realm/Headers (0.94.1)
@@ -11,12 +14,14 @@ PODS:
 DEPENDENCIES:
   - GoogleMaps
   - GooglePlacesAutocomplete
+  - Mixpanel
   - RealmSwift
   - SwiftAddressBook
 
 SPEC CHECKSUMS:
   GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
   GooglePlacesAutocomplete: 7694636fce561c9d8ac807b8e490d299a730a633
+  Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
   Realm: d999a6cf0b41577a077349c9cc9d496cc62a7d17
   RealmSwift: 06b60ff5b1338755654d39aab44ac38001600f76
   SwiftAddressBook: 52a1de22c5fe7e9d115967bc51a4ba1225cd8b56

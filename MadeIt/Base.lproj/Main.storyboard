@@ -264,7 +264,6 @@
         <!--Text Sender-->
         <scene sceneID="6B0-Sb-AXZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S7w-jD-pEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="RmZ-6C-8l1" customClass="TextSender" customModule="MadeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j2v-ge-VsD"/>
@@ -297,13 +296,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="OqI-zZ-3qX"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S7w-jD-pEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2928" y="1006"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KIu-6H-ehh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="htD-3d-TqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GnH-wd-iWu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q2G-Ih-wKk">
@@ -315,6 +314,7 @@
                         <segue destination="RmZ-6C-8l1" kind="relationship" relationship="rootViewController" id="EQ5-eu-dDU"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="htD-3d-TqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2116" y="1006"/>
         </scene>

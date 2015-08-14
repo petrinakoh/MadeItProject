@@ -11,6 +11,7 @@ import GoogleMaps
 import AddressBook
 import AddressBookUI
 import SenseSdk
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Mixpanel.sharedInstanceWithToken("fcd432178badb19a0c963ebb6a8c8a20")
+        let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+        mixpanel.track("App launched")
         
         GMSServices.provideAPIKey(googleMapsApiKey)
         SenseSdk.enableSdkWithKey("5ce89061-4891-409a-8549-9c8a5cd6d57f")

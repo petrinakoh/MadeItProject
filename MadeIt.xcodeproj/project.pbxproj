@@ -22,6 +22,7 @@
 		6F6533E61B54203E006C857D /* MapDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6533E51B54203E006C857D /* MapDisplayViewController.swift */; };
 		6F6533E81B542221006C857D /* AlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6533E71B542221006C857D /* AlertTableViewCell.swift */; };
 		6F6533EA1B5422E6006C857D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6533E91B5422E6006C857D /* Alert.swift */; };
+		6F726C8E1B7EB451000BE32A /* launchicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F726C8D1B7EB451000BE32A /* launchicon.png */; };
 		6FC2CA531B7AAF7D00A7A102 /* AutocompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2CA521B7AAF7D00A7A102 /* AutocompleteTextField.swift */; };
 		6FDCEC591B573B72000A9AA8 /* ContactsDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDCEC581B573B72000A9AA8 /* ContactsDisplayViewController.swift */; };
 		6FDCEC5B1B5C6C18000A9AA8 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDCEC5A1B5C6C18000A9AA8 /* FriendTableViewCell.swift */; };
@@ -82,6 +83,7 @@
 		6F6533E51B54203E006C857D /* MapDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDisplayViewController.swift; sourceTree = "<group>"; };
 		6F6533E71B542221006C857D /* AlertTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertTableViewCell.swift; sourceTree = "<group>"; };
 		6F6533E91B5422E6006C857D /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		6F726C8D1B7EB451000BE32A /* launchicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchicon.png; sourceTree = "<group>"; };
 		6FC2CA521B7AAF7D00A7A102 /* AutocompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteTextField.swift; sourceTree = "<group>"; };
 		6FDCEC581B573B72000A9AA8 /* ContactsDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsDisplayViewController.swift; sourceTree = "<group>"; };
 		6FDCEC5A1B5C6C18000A9AA8 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				6F0750B51B600B5D00FCBC61 /* ReachedDestinationDetector.swift */,
 				6F4E43E51B509159007FC913 /* Main.storyboard */,
 				6F4E43E81B509159007FC913 /* Images.xcassets */,
+				6F726C8D1B7EB451000BE32A /* launchicon.png */,
 				6F4E43EA1B509159007FC913 /* LaunchScreen.xib */,
 				6F4E43DF1B509159007FC913 /* Supporting Files */,
 			);
@@ -334,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F4E43E71B509159007FC913 /* Main.storyboard in Resources */,
+				6F726C8E1B7EB451000BE32A /* launchicon.png in Resources */,
 				6F4E43EC1B509159007FC913 /* LaunchScreen.xib in Resources */,
 				6F4E43E91B509159007FC913 /* Images.xcassets in Resources */,
 			);
