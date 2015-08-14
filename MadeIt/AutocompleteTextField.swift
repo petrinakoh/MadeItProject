@@ -28,7 +28,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     public var onTextChange:(String)->() = {_ in}
     
     /// Font for the text suggestions
-    public var autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 12)
+    public var autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 15)
     /// Color of the text suggestions
     public var autoCompleteTextColor = UIColor.blackColor()
     /// Used to set the height of cell for each suggestions
@@ -38,7 +38,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     /// Used to set your own preferred separator inset
     public var autoCompleteSeparatorInset = UIEdgeInsetsZero
     /// Shows autocomplete text with formatting
-    public var enableAttributedText = false
+    public var enableAttributedText = true
     /// User Defined Attributes
     public var autoCompleteAttributes:[String:AnyObject]?
     // Hides autocomplete tableview after selecting a suggestion
@@ -88,7 +88,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     private func commonInit(){
         hidesWhenEmpty = true
         autoCompleteAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()]
-        autoCompleteAttributes![NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 12)
+        autoCompleteAttributes![NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 15)
         self.clearButtonMode = .Always
         self.addTarget(self, action: "textFieldDidChange", forControlEvents: .EditingChanged)
     }
@@ -163,7 +163,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     //MARK: - Private Interface
     private func reload(){
         if enableAttributedText{
-            let attrs = [NSForegroundColorAttributeName:autoCompleteTextColor, NSFontAttributeName:UIFont.systemFontOfSize(12.0)]
+            let attrs = [NSForegroundColorAttributeName:autoCompleteTextColor, NSFontAttributeName:UIFont.systemFontOfSize(15.0)]
             if attributedAutoCompleteStrings == nil{
                 attributedAutoCompleteStrings = [NSAttributedString]()
             }

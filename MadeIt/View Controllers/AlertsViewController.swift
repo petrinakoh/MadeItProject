@@ -17,6 +17,13 @@ class AlertsViewController: UIViewController, MFMessageComposeViewControllerDele
     var alerts: Results<Alert>! {
         didSet {
             tableView.reloadData()
+            
+            if alerts.count == 0 {
+                tableView.hidden = true
+            } else {
+                tableView.hidden = false
+            }
+            
         }
     }
     
@@ -65,7 +72,9 @@ class AlertsViewController: UIViewController, MFMessageComposeViewControllerDele
         // setup observer
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "sendMessageFromNotification:", name: "SEND_MESSAGE", object: nil)
         
-        
+        if alerts.count == 0{
+            tableView.hidden = true
+        }
     }
     
 

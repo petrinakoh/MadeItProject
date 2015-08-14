@@ -179,12 +179,14 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocation
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        
         println("prepareForSegue")
         println(savedDestination)
         println("DestLat is \(destLat)")
         println("DestLong is \(destLong)")
         var cdvc = segue.destinationViewController as! ContactsDisplayViewController
-        cdvc.destination = savedDestination
+        cdvc.destination = searchedDestination
         cdvc.destLat = destLat
         cdvc.destLong = destLong
 
