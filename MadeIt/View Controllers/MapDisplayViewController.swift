@@ -15,7 +15,7 @@ import CoreLocation
 
 class MapDisplayViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate, NSURLConnectionDataDelegate {
     
-    let googleMapsApiKey = "AIzaSyAUb1UcBLUJKAaiZCqOYugrVtHrrDWclAk"
+    let googleMapsApiKey = "AIzaSyBZNBb6iHKRYXaX8ULs7wsZXg4_bWH_u4M"
     
     let realm = Realm()
     

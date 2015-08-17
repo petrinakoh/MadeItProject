@@ -299,7 +299,7 @@
 				TargetAttributes = {
 					6F4E43DB1B509159007FC913 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = WK3VAH28UA;
+						DevelopmentTeam = 8XXSFE8H69;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -607,8 +607,8 @@
 			baseConfigurationReference = 1A3759BC80D1C876EB737FAE /* Pods-MadeIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -616,7 +616,7 @@
 				INFOPLIST_FILE = MadeIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "19a7b13d-035a-4c5e-bab6-ee342f171903";
 			};
 			name = Debug;
 		};
@@ -625,8 +625,8 @@
 			baseConfigurationReference = 00C0EAF5035E90D14D2020D2 /* Pods-MadeIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -634,7 +634,7 @@
 				INFOPLIST_FILE = MadeIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "19a7b13d-035a-4c5e-bab6-ee342f171903";
 			};
 			name = Release;
 		};
