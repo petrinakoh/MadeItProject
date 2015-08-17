@@ -157,6 +157,7 @@ class ContactsDisplayViewController: UITableViewController {
 
         searchContacts.delegate = self
 
+
         // Do any additional setup after loading the view.
     }
     
@@ -210,6 +211,10 @@ class ContactsDisplayViewController: UITableViewController {
             // this goes back to the main dashboard
             let dateNow = NSDate().timeIntervalSince1970
             currentAlert = Alert(destination: destination, name: selectedPerson!.name, phone: selectedPerson!.phone, destLong: destLong, destLat: destLat, alertSwitch: true, identifier: "\(dateNow)")
+            
+            // For testing
+            //NotificationSender.sendNotification("217-898-7054")
+
         }
     }
     // Search for Contact
@@ -263,8 +268,8 @@ extension ContactsDisplayViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("didSelectRowAtIndexPath")
-//        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-//        selectedCell.contentView.backgroundColor = UIColor(red: 187/255, green: 255/255, blue: 255/255, alpha: 0.8)
+        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        selectedCell.contentView.backgroundColor = UIColor(red: 182/255, green: 238/255, blue: 166/255, alpha: 1.0)
         selectedPerson = contactsToDisplay[indexPath.row]
         searchContacts.resignFirstResponder()
         println(selectedPerson)

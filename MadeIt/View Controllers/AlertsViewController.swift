@@ -75,6 +75,7 @@ class AlertsViewController: UIViewController, MFMessageComposeViewControllerDele
         if alerts.count == 0{
             tableView.hidden = true
         }
+        
     }
     
 

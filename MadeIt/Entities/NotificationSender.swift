@@ -43,6 +43,7 @@ class NotificationSender {
 //        notif.category = "appNotificationCategory"
         notif.userInfo = ["recipientNumber" : recipientNumber, "type": "SEND_MESSAGE"]
         
+        // For testing
         //notif.fireDate = NSDate().dateByAddingTimeInterval(8)
         //UIApplication.sharedApplication().scheduleLocalNotification(notif)
         UIApplication.sharedApplication().presentLocalNotificationNow(notif)
